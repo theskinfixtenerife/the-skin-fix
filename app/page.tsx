@@ -34,7 +34,7 @@ const handleStart = () => {
   setDragging(true)
 }
 
-const handleMove = (e) => {
+const handleMove = (e: any) => {
   if (!dragging) return
 
   const x = e.clientX || e.touches?.[0]?.clientX
