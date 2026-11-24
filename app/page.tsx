@@ -973,10 +973,7 @@ relative flex h-full min-h-[340px] flex-col overflow-hidden rounded-[16px] borde
   </div>
   
 </footer>
-<form
-name="consulta"
-  method="POST"
-  data-netlify="true"
+<div
   className={`fixed bottom-6 right-6 z-50 overflow-hidden transition-all duration-300
 ${isMinimized
   ? "h-[54px] w-[54px] rounded-full bg-[#25D366] p-0 shadow-[0_8px_22px_rgba(37,211,102,0.35)] hover:-translate-y-1"
@@ -1087,7 +1084,7 @@ ${isMinimized
 >
   ENVIAR
 </button>
-</form>
+</div>
 </div>
 
 </>
