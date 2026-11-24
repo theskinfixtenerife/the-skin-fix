@@ -1,580 +1,445 @@
 "use client";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Waves, Droplet, Bandage, CircleDot, Sparkles } from "lucide-react";
+import Link from "next/link";
 export default function ProtocoloPage() {
   const [showPrices, setShowPrices] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
+const [showInfo, setShowInfo] = useState(false);
   const protocolos = [
     
     {
       number: "01",
-      title: "acné y piel congestionada",
+      title: "Acné y piel congestionada",
       description:
         "Para pieles que presentan brotes recurrentes, inflamación o tendencia a la obstrucción.",
     },
     {
       number: "02",
-      title: "rosácea y sensibilidad",
+      title: "Rosácea y sensibilidad",
       description:
         "Para pieles reactivas que experimentan enrojecimiento, ardor o intolerancia frecuente.",
     },
     {
       number: "03",
-      title: "hidratación y luminosidad",
+      title: "Hidratación y luminosidad",
       description:
         "Para pieles apagadas, deshidratadas o con sensación constante de tirantez.",
     },
     {
       number: "04",
-      title: "textura\ny poros",
+      title: "Textura y poros",
       description:
         "Para pieles que presentan irregularidades visibles en la superficie cutánea.",
     },
     {
       number: "05",
-      title: "manchas y pigmentación",
+      title: "Manchas y pigmentación",
       description:
         "Para pieles con alteraciones del tono o pigmentación desigual.",
     },
     {
       number: "06",
-      title: "cicatrices y marcas",
+      title: "Cicatrices y marcas",
       description:
         "Para pieles que presentan secuelas visibles tras procesos inflamatorios.",
     },
     {
       number: "07",
-      title: "elasticidad y regeneración",
+      title: "Elasticidad y regeneración",
       description:
         "Para pieles que han perdido firmeza, densidad o capacidad de recuperación.",
     },
   ];
 
   return (
-    <main className="bg-white min-h-screen py-24 px-6 relative overflow-hidden">
-        <div
-  className="absolute left-[450px] top-[120px] pointer-events-none"
-  style={{ opacity: 0.08 }}
->
-  
-</div>
-      <div className="max-w-7xl mx-auto rounded-[6px] bg-[#F7F4F1] px-16 py-20">
-        <div className="mt-0 mb-20 max-w-3xl relative">
-            <div
- 
->
+    
+    <main className="relative min-h-screen overflow-hidden bg-[#FFFEFC] px-4 pb-20 pt-6 text-[#2C2725] sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1320px]">
+        <Link
+          href="/"
+          className="mb-6 inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#6E6259] transition-colors hover:text-[#A86F56]"
+        >
+          <span aria-hidden="true">←</span> Inicio
+        </Link>
 
-</div>
-<div className="relative z-10"></div>
-          <p className="uppercase tracking-[0.3em] text-[11px] text-[#B98B72] mb-4">
-            Protocolo
-          </p>
-
-          <h1
-  className="text-[48px] md:text-[72px] leading-[0.95] font-black tracking-[-0.04em] text-[#B98B72]"
->
-            elige tu protocolo
-            <br />
-           
-          </h1>
-<div className="absolute right-40 -top-1 hidden lg:block"
-style={{ right: "10px" }}>
-  <img
-  src="/CHICABELLA.webp"
-  alt="Modelo"
-  className="w-[500px] h-[250px] object-cover rounded-[6px] translate-x-100"
-/>
-</div>
-          <p className=" mt-8 text-[#5D534A] leading-relaxed max-w-md">
-            Cada protocolo ha sido diseñado para abordar una necesidad específica de la piel dentro de una metodología. Selecciona el objetivo que deseas trabajar:
-          </p>
-          
-          <div className="max-w-[400px] mx-auto">
- 
-</div>
-        </div>
-
-
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {protocolos.map((item) => (
-            <a
-  href={`https://wa.me/34618820842?text=${encodeURIComponent(
-    `Me gustaría probar el protocolo "${item.title}". ¿Cuando tendrías una cita disponible?`
-  )}`}
-  target="_blank"
-  rel="noopener noreferrer"
-              key={item.number}
-              className="
-border-[#ece7e2]
-    rounded-[32px]
-    p-10
-    h-[300px]
-    flex
-    flex-col
-    hover:-translate-y-1
-    hover:shadow-xl
-    transition-all
-    duration-500
-"
+        <motion.section
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="grid overflow-hidden rounded-[20px] bg-[#FAF8F5] lg:min-h-[500px] lg:grid-cols-[1.05fr_0.95fr]"
+        >
+          <div className="flex flex-col items-start justify-center px-6 py-12 sm:px-10 sm:py-14 lg:px-14 lg:py-16">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#A86F56]">
+              The Skin Fix · Recuperación cutánea
+            </p>
+            <h1
+              className="max-w-[640px] text-[clamp(2.8rem,6vw,5rem)] font-bold uppercase leading-[0.92] tracking-[-0.055em] text-[#2C2725]"
+              style={{ fontFamily: "Satoshi" }}
             >
-              <p className="text-[#B98B72] text-3xl mb-4">{item.number}</p>
+              Protocolos
+              <span className="mt-1 block text-[#A86F56]">para cada piel</span>
+            </h1>
+            <p className="mt-6 max-w-[540px] text-[16px] leading-[1.7] text-[#5F5852] sm:text-[17px]">
+              Cada protocolo parte de las necesidades de tu piel. Explora nuestras áreas de trabajo y encuentra un punto de partida para tu proceso de recuperación.
+            </p>
+            <button
+              onClick={() => document.getElementById("protocolos")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              className="mt-8 inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#A86F56] px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_10px_24px_rgba(90,55,35,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#8F5C45] hover:shadow-[0_14px_30px_rgba(90,55,35,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#8F5C45]"
+            >
+              Explorar protocolos <span aria-hidden="true">↓</span>
+            </button>
+          </div>
+          <div className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-full">
+            <Image
+              src="/CHICABELLA.webp"
+              alt="Retrato de una mujer con la piel luminosa"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#2C2725]/20 via-transparent to-transparent lg:bg-gradient-to-l lg:from-transparent lg:to-[#FAF8F5]/10" />
+          </div>
+        </motion.section>
 
-              <h2
-  className="text-[28px] leading-tight text-[#5E534A] mb-6 min-h-[80px] whitespace-pre-line"
-  style={{ fontFamily: "satoshi" }}
->
-  {item.title}
-</h2>
-
-              <p className="text-[#B3A99D] text-sm leading-relaxed">
-                {item.description}
-              </p>
-
-
-            </a>
-          ))}
-
-          <div className="bg-[#EFE7E0]/80 rounded-[7px] p-7 flex flex-col h-[420px]">
+        <section id="protocolos" className="scroll-mt-8 pt-16 sm:pt-20">
+          <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              
-              <h2
-                className="text-[25px] mt-5 leading-none font-medium text-[#8B7C6D] mt-12 mb-12 text-center"
-                style={{ fontFamily: "satoshi" }}
-              >
-                ¿no sabes por dónde empezar?
-              </h2>
-
-              <p className="text-[15px] mt-8 leading-relaxed text-[#666] text-center">
-                En el <strong>PLAN GUIADO</strong> estudiamos tu caso antes de comenzar y te indicamos el protocolo más adecuado para tus objetivos.
-                
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#A86F56]">
+                Elige por necesidad
               </p>
-              
+              <h2 className="text-[32px] font-bold leading-[1] tracking-[-0.045em] text-[#2C2725] sm:text-[40px]" style={{ fontFamily: "Satoshi" }}>
+                ¿Qué te gustaría trabajar?
+              </h2>
+            </div>
+            <p className="max-w-[430px] text-[14px] leading-[1.6] text-[#6A6058] sm:text-right">
+              Consulta cada protocolo. Si no tienes claro cuál elegir, puedes empezar con una valoración guiada.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {protocolos.map((item) => (
+              <a
+                key={item.number}
+                href={`https://wa.me/34618820842?text=${encodeURIComponent(
+                  `Me gustaría probar el protocolo "${item.title}". ¿Cuándo tendrías una cita disponible?`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex min-h-[250px] flex-col rounded-[16px] border border-[#E8DED5] bg-[#FFFEFC] p-6 shadow-[0_6px_22px_rgba(82,62,48,0.035)] transition-all duration-300 hover:-translate-y-1 hover:border-[#C9A58F] hover:shadow-[0_16px_34px_rgba(82,62,48,0.1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#A86F56] sm:p-7"
+              >
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="text-[11px] font-semibold tracking-[0.16em] text-[#A86F56]">PROTOCOLO {item.number}</span>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#E8DED5] text-[16px] text-[#A86F56] transition-all group-hover:border-[#A86F56] group-hover:bg-[#A86F56] group-hover:text-white" aria-hidden="true">↗</span>
+                </div>
+                <h3 className="text-[22px] font-semibold leading-[1.15] tracking-[-0.025em] text-[#2C2725]" style={{ fontFamily: "Satoshi" }}>
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-[14px] leading-[1.6] text-[#665D56]">
+                  {item.description}
+                </p>
+                <span className="mt-auto border-t border-[#EEE7E1] pt-5 text-[10px] font-bold uppercase tracking-[0.15em] text-[#8F5C45]">
+                  Consultar este protocolo
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <div className="mt-8 grid gap-6 rounded-[18px] bg-[#2C2725] p-6 text-[#FFF9ED] sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center lg:px-10">
+            <div>
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.17em] text-[#D7A58D]">PLAN GUIADO</p>
+              <h3 className="text-[24px] font-semibold tracking-[-0.035em] sm:text-[28px]" style={{ fontFamily: "Satoshi" }}>
+                ¿No sabes por dónde empezar?
+              </h3>
+              <p className="mt-2 max-w-[650px] text-[14px] leading-[1.6] text-[#F1E8E1]">
+                Estudiamos tu caso y orientamos el punto de partida según el estado y las necesidades de tu piel.
+              </p>
+            </div>
+            <a
+              href="https://wa.me/34618820842?text=Hola,%20quiero%20reservar%20mi%20diagnóstico.%20¿Qué%20días%20tienes%20disponibles?"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#A86F56] px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 hover:bg-[#B97D62] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#D7A58D]"
+            >
+              Reservar valoración
+            </a>
+          </div>
+        </section>
+
+        <section id="precios" className="mt-16 scroll-mt-8 rounded-[18px] border border-[#E8DED5] bg-[#FAF8F5] p-6 sm:mt-20 sm:p-8 lg:p-10">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#A86F56]">Transparencia y continuidad</p>
+              <h2 className="text-[26px] font-bold tracking-[-0.035em] text-[#2C2725] sm:text-[30px]" style={{ fontFamily: "Satoshi" }}>
+                Consulta precios y opciones
+              </h2>
+              <p className="mt-2 text-[14px] leading-[1.6] text-[#665D56]">Revisa las tarifas y las opciones para continuar tu recuperación.</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                aria-expanded={showPrices}
+                onClick={() => setShowPrices(!showPrices)}
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#A86F56] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.14em] text-[#8F5C45] transition-colors hover:bg-[#A86F56] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#A86F56]"
+              >
+                {showPrices ? "Ocultar tarifas" : "Consultar tarifas"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowInfo(true)}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6A6058] transition-colors hover:text-[#8F5C45]"
+              >
+                <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#C9A58F] text-[12px]">i</span>
+                Información
+              </button>
+            </div>
+          </div>
+
+          <div
+            className={`overflow-hidden transition-all duration-500 ease-out ${showPrices ? "mt-7 max-h-[900px] opacity-100" : "max-h-0 opacity-0"}`}
+            aria-hidden={!showPrices}
+          >
+            <Image
+              src="/nuevosprecios.png"
+              alt="Tarifas de los protocolos y opciones de continuidad"
+              width={1774}
+              height={887}
+              className="mx-auto w-full max-w-[900px] rounded-[12px]"
+            />
+          </div>
+        </section>
+
+        <section className="mt-16 sm:mt-20">
+          <div className="mb-7">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#A86F56]">Continuidad del proceso</p>
+            <h2 className="text-[28px] font-bold tracking-[-0.04em] text-[#2C2725] sm:text-[34px]" style={{ fontFamily: "Satoshi" }}>
+              Continúa tu recuperación
+            </h2>
+          </div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+            className="grid gap-4 sm:grid-cols-3"
+          >
+            {[
+              { sessions: "3 sesiones", discount: "−10%" },
+              { sessions: "5 sesiones", discount: "−20%" },
+              { sessions: "10 sesiones", discount: "−30%" },
+            ].map((item) => (
+              <motion.div
+                key={item.sessions}
+                variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-[16px] border border-[#E8DED5] bg-[#FFFEFC] p-6 sm:p-7"
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6A6058]">{item.sessions}</p>
+                <p className="mt-4 text-[56px] font-semibold leading-none tracking-[-0.06em] text-[#A86F56]" style={{ fontFamily: "Satoshi" }}>{item.discount}</p>
+                <div className="mt-5 h-px bg-[#E8DED5]" />
+              </motion.div>
+            ))}
+          </motion.div>
+          <p className="mt-4 text-[13px] text-[#6A6058]">Descuentos disponibles para cualquier protocolo.</p>
+        </section>
+
+        {showInfo && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2C2725]/55 p-4 backdrop-blur-sm" onClick={() => setShowInfo(false)}>
+            <div className="max-h-[88vh] w-full max-w-[560px] overflow-y-auto rounded-[18px] border border-[#E8DED5] bg-[#FFFEFC] p-6 shadow-[0_24px_70px_rgba(44,39,37,0.22)] sm:p-8" onClick={(event) => event.stopPropagation()}>
+              <div className="mb-6 flex items-start justify-between gap-6">
+                <div>
+                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#A86F56]">Antes de empezar</p>
+                  <h3 className="text-[21px] font-semibold tracking-[-0.025em] text-[#2C2725]" style={{ fontFamily: "Satoshi" }}>Información importante</h3>
+                </div>
+                <button type="button" onClick={() => setShowInfo(false)} aria-label="Cerrar información" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#E8DED5] text-[#6A6058] transition-colors hover:bg-[#FAF8F5]">×</button>
+              </div>
+              <div className="space-y-4 text-[14px] leading-[1.65] text-[#5F5852]">
+                <p>• El PLAN LIBRE está destinado a usuarios que deciden realizar el protocolo sin asesoramiento ni seguimiento profesional continuado.</p>
+                <p>• Al contratar el PLAN LIBRE, el usuario asume la responsabilidad de seguir las indicaciones proporcionadas y de comunicar cualquier circunstancia que pueda afectar a la seguridad del tratamiento.</p>
+                <p>• the<strong>skin</strong>fix™ no podrá responsabilizarse de los resultados obtenidos con el PLAN LIBRE ni de posibles reacciones derivadas del incumplimiento de las recomendaciones facilitadas o de la ausencia de diagnóstico o seguimiento profesional.</p>
+                <p>• El protocolo recomendado se determinará durante el PLAN GUIADO o en the<strong>skin</strong>fix™<strong>CLUB</strong>.</p>
+                <p>• El número de sesiones puede variar según las necesidades de cada caso.</p>
+                <p>• La recomendación profesional podrá actualizarse según la evolución de la piel.</p>
+              </div>
+            </div>
+          </div>
+        )}
+     
+
+{/* TRATAMIENTOS CLÍNICO-TERAPÉUTICOS */}
+
+<section className="mt-16 rounded-[18px] bg-[#FAF8F5] p-6 sm:mt-20 sm:p-10">
+  <div className="mx-auto max-w-5xl">
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.65 }}
+      className="mb-8 max-w-2xl"
+    >
+      <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#A86F56]">Otras áreas de cuidado</p>
+      <h2 className="text-[32px] font-bold leading-[1] tracking-[-0.045em] text-[#2C2725] sm:text-[40px]" style={{ fontFamily: "Satoshi" }}>
+        Tratamientos terapéuticos
+      </h2>
+    </motion.div>
+
+    <div className="grid gap-4 md:grid-cols-2">
+
+      {[
+        {
+          title: "DLM",
+          subtitle: "Drenaje Linfático Manual",
+          text: "Favorece la circulación linfática y ayuda a reducir inflamación y retención de líquidos cuando existe una indicación terapéutica.",
+          tag: "Recuperación · Inflamación",
+          icon: Waves
+        },
+        {
+          title: "DLMP",
+          subtitle: "Drenaje Linfático Postquirúrgico",
+          text: "Acompaña la recuperación tras procedimientos quirúrgicos favoreciendo una evolución más controlada del tejido.",
+          tag: "Postoperatorio",
+          icon: Droplet
+        },
+        {
+          title: "Extracción de Milium",
+          subtitle: "",
+          text: "Eliminación precisa de pequeños quistes de queratina mediante una técnica controlada.",
+          tag: "Precisión clínica",
+          icon: Sparkles
+        },
+        {
+          title: "Reducción de Acrocordones",
+          subtitle: "",
+          text: "Eliminación segura de pequeñas lesiones cutáneas cuando está clínicamente indicado.",
+          tag: "Lesiones benignas",
+          icon: CircleDot
+        },
+        {
+          title: "Kinesio Facial",
+          subtitle: "",
+          text: "Vendaje terapéutico que acompaña la recuperación ayudando a modular tensión e inflamación.",
+          tag: "Recuperación muscular",
+          icon: Bandage
+        },
+        {
+          title: "Face Cupping",
+          subtitle: "",
+          text: "Técnica manual orientada a estimular la circulación y favorecer el drenaje tisular.",
+          tag: "Estimulación tisular",
+          icon: CircleDot
+        }
+      ].map((item, i) => {
+        const Icon = item.icon;
+
+        return (
+          <motion.div
+            key={item.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, delay: i * 0.05 }}
+            className="group rounded-[16px] border border-[#E8DED5] bg-[#FFFEFC] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#C9A58F] hover:shadow-[0_14px_30px_rgba(82,62,48,0.08)] sm:p-7"
+          >
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F3E7DF] text-[#A86F56]">
+                <Icon size={19} strokeWidth={1.6} aria-hidden="true" />
+              </span>
+              <span className="text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-[#8F5C45]">{item.tag}</span>
             </div>
 
-            <a
-  href="https://wa.me/34618820842?text=Hola,%20quiero%20reservar%20mi%20diagnóstico%20.%20¿Qué%20días%20tienes%20disponibles?"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="mt-8 mx-auto rounded-full bg-[#A6564D] hover:bg-[#B98B72] px-8 py-4 text-white uppercase tracking-[0.2em] text-[11px] w-fit inline-block"
->
-  Reservar
-</a>
+            <h4
+              className="text-[25px] font-semibold leading-[1.1] tracking-[-0.04em] text-[#2C2725]"
+              style={{ fontFamily: "Satoshi" }}
+            >
+              {item.title}
+            </h4>
 
-          </div>
-        </div>
-        <div className="flex justify-center mb-8">
-  <button
-    onClick={() => setShowInfo(true)}
-    className="w-6 h-6 rounded-full border border-[#B98B72] flex items-center justify-center text-[11px] text-[#B98B72] hover:bg-[#B98B72]/10 transition-all"
-    style={{ fontFamily: "satoshi" }}
-  >
-    i
-  </button>
-</div>
+            {item.subtitle && (
+              <p
+                className="mt-2 text-[14px] font-medium text-[#6A6058]"
+                style={{ fontFamily: "Satoshi" }}
+              >
+                {item.subtitle}
+              </p>
+            )}
 
-{showInfo && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm">
-    <div className="max-w-md rounded-[28px] bg-[#F7F3EF] p-8 shadow-xl">
-
-      <button
-        onClick={() => setShowInfo(false)}
-        className="float-right text-[#B98B72]"
-      >
-        ✕
-      </button>
-
-      <h3
-        className="mb-6 text-[18px] text-[#B98B72]"
-        style={{ fontFamily: "satoshi" }}
-      >
-        información antes de hacer un protocolo
-      </h3>
-
-      <div className="space-y-4 text-sm text-[#5E534A] leading-relaxed">
-
-        <p>• El PLAN LIBRE está destinado a usuarios que deciden realizar el protocolo sin asesoramiento ni seguimiento profesional continuado.</p>
-        
-        <p>• Al contratar el PLAN LIBRE, el usuario asume la responsabilidad de seguir las indicaciones proporcionadas y de comunicar cualquier circunstancia que pueda afectar a la seguridad del tratamiento.</p>
-
-        <p>• the<strong>skin</strong>fix™ no podrá responsabilizarse de los resultados obtenidos con ningún plan ni de posibles reacciones derivadas del incumplimiento de las recomendaciones facilitadas o de la ausencia de diagnóstico o seguimiento profesional.</p>
-
-        <p>• El protocolo recomendado se determinará durante el PLAN GUIADO o en the<strong>skin</strong>fix™<strong>CLUB</strong>.</p>
-
-        <p>• El número de sesiones puede variar según las necesidades de cada caso.</p>
-
-        <p>• La recomendación profesional podrá actualizarse según la evolución de la piel.</p>
-
-      </div>
-
+            <p
+              className="mt-4 text-[14px] leading-[1.65] text-[#5F5852]"
+              style={{ fontFamily: "Satoshi" }}
+            >
+              {item.text}
+            </p>
+          </motion.div>
+        );
+      })}
     </div>
-  </div>
-)}
-      </div>
-     
-     <div className="flex justify-center mt-16 mb-10">
-  <button
-    onClick={() => setShowPrices(!showPrices)}
-    className="text-[13px] uppercase tracking-[0.25em] text-[#B98B72]"
-    style={{ fontFamily: "satoshi" }}
-  >
-    Consultar precios {showPrices ? "↑" : "↓"}
-  </button>
-</div>
-
-<div
-  className={`overflow-hidden transition-all duration-500 ease-out ${
-    showPrices
-      ? "max-h-[1200px] opacity-100"
-      : "max-h-0 opacity-0"
-  }`}
->
-  <div className="mt-4 mb-20 max-w-[1280px] mx-auto">
-    <img
-      src="/preciosnueva.png"
-      alt="Tabla de precios"
-      className="w-full max-w-[800px] mx-auto rounded-[8px]"
-    />
-  </div>
-</div>
-
-
-<section className="mt-24 mb-24">
-  <div className="max-w-[900px] mx-auto">
-
-    <p
-            className="text-[48px] md:text-[52px] mt-28 font-bold leading-[0.95] mb-8 text-[#A6564D] text-center "
-            style={{ fontFamily: "satoshi" }}
-          >
-      continúa tu recuperación
-    </p>
-
-    <div className="grid md:grid-cols-3 gap-8">
-
-      <div className="bg-[#F7F4F1] rounded-[6px] p-8 text-center">
-        <h3
-          className="text-[22px] text-[#5B4E46]"
-          style={{ fontFamily: "satoshi" }}
-        >
-          3 sesiones
-        </h3>
-
-        <p
-          className="text-[54px] leading-none mt-4 text-[#B98B72]"
-          style={{ fontFamily: "satoshi" }}
-        >
-          -10%
-        </p>
-      </div>
-
-      <div className="bg-[#F7F4F1] rounded-[6px] p-8 text-center">
-        <h3
-          className="text-[22px] text-[#5B4E46]"
-          style={{ fontFamily: "satoshi" }}
-        >
-          5 sesiones
-        </h3>
-
-        <p
-          className="text-[54px] leading-none mt-4 text-[#B98B72]"
-          style={{ fontFamily: "satoshi" }}
-        >
-          -20%
-        </p>
-      </div>
-
-      <div className="bg-[#F7F4F1] rounded-[6px] p-8 text-center">
-        <h3
-          className="text-[22px] text-[#5B4E46]"
-          style={{ fontFamily: "satoshi" }}
-        >
-          10 sesiones
-        </h3>
-
-        <p
-          className="text-[54px] leading-none mt-4 text-[#B98B72]"
-          style={{ fontFamily: "satoshi" }}
-        >
-          -30%
-        </p>
-      </div>
-
-    </div>
-
-    <p
-      className="text-center text-[13px] text-[#847E78] mt-10"
-      style={{ fontFamily: "satoshi" }}
-    >
-      Disponible para cualquier protocolo
-    </p>
 
   </div>
 </section>
-<section className="px-6 py-8">
-  <div className="max-w-[1280px] mx-auto rounded-[6px] bg-[#F7F4F1] overflow-hidden">
-    <section className="mt-32 pb-32">
 
-  <div className="max-w-7xl mx-auto px-24">
+{/* FOOTER CTA */}
 
-
-    <h2
-      className="text-center text-[64px] md:text-[72px] leading-[0.95] text-[#B98B72]"
-      style={{ fontFamily: "satoshi" }}
+<section className="mt-10 mb-4">
+  <div className="grid gap-6 rounded-[18px] bg-[#E9DCCF] p-6 sm:grid-cols-[1fr_auto] sm:items-center sm:p-9">
+    <div>
+      <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#8F5C45]">The Skin Fix</p>
+      <h2 className="text-[25px] font-semibold tracking-[-0.035em] text-[#2C2725] sm:text-[30px]" style={{ fontFamily: "Satoshi" }}>
+        Da el siguiente paso en tu recuperación
+      </h2>
+      <p className="mt-2 text-[14px] leading-[1.6] text-[#5F5852]">Consulta las tarifas y elige cómo quieres continuar.</p>
+    </div>
+    <button
+      type="button"
+      onClick={() => {
+        setShowPrices(true);
+        document.getElementById("precios")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }}
+      className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#A86F56] px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_10px_24px_rgba(90,55,35,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#8F5C45] hover:shadow-[0_14px_30px_rgba(90,55,35,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#8F5C45]"
     >
-      con tiempo todo se logra
-      <br />
-      
-    </h2>
-
-<div className="mt-8 mb-16 overflow-hidden border-y border-[#ebe5df] py-7">
-  <div className="flex whitespace-nowrap animate-marquee w-max">
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">92%</span> Mayor hidratación percibida
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">89%</span> Compromiso con el tratamiento recomendado
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">100%</span> Cambios en la primera sesión
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">87%</span> Mejora progresiva en textura
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    {/* DUPLICADO 1 */}
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">92%</span> DE LOS CLIENTES PERCIBEN
-MAYOR HIDRATACIÓN
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">89%</span> MENOS ROJEZ VISIBLE
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">+500</span> CASOS ANALIZADOS
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">87%</span> Mejora visible en textura
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    {/* DUPLICADO 2 */}
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">92%</span> Mayor hidratación percibida
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">89%</span> Satisfacción global
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">100%</span> Estrategias personalizadas
-    </span>
-
-    <span className="text-[#d8c8ba]">—</span>
-
-    <span className="mx-12 text-[12px] tracking-[0.22em] uppercase text-[#847E78]">
-      <span className="text-[#B87333]">87%</span> Mejora visible en textura
-    </span>
-
+      Consultar tarifas
+    </button>
   </div>
-</div>
 
-    <div className="grid md:grid-cols-2 gap-x-24 gap-y-24 mt-20 max-w-[980px] mx-auto">
+  <div className="mt-8 flex flex-col gap-6 border-t border-[#E8DED5] pt-6 sm:flex-row sm:items-center sm:justify-between">
 
-      <div className="group">
-        <div className="overflow-hidden rounded-[6px] border border-[#ece7e2] max-w-[420px]">
+        <Image
+           src="/tsf-logo.png"
+           alt="the skin fix"
+           width={140}
+           height={32}
+           className="h-[28px] w-auto opacity-90 object-contain"
+         />
 
-  <img
-  src="/casos/acne-hormonal.jpg"
-  alt="Caso real acné hormonal"
-  className="w-full h-[540px] object-cover"
-/>
+        <div className="flex flex-wrap gap-x-6 gap-y-3 text-[10px] font-semibold tracking-[0.14em] text-[#6A6058] sm:gap-8">
 
-</div>
-        <div className="mt-6">
-          <p className="uppercase tracking-[0.2em] text-center text-[11px] font-bold text-[#A6564D]">
-            Disrupción de barrera
-          </p>
-          <p className="mt-3 text-[#666]">
-            Recuperación progresiva de sensibilidad con combinación de protocolos 01, 02 y 03.
-          </p>
-          
+          <a
+            href="/diagnostico"
+            className="uppercase tracking-[0.18em] hover:opacity-70 transition"
+          >
+            DIAGNÓSTICO
+          </a>
+
+          <a
+            href="/protocolo"
+            className="uppercase tracking-[0.18em] text-[#000000] hover:opacity-70 transition"
+          >
+            PROTOCOLO
+          </a>
+
+          <a
+            href="/seguimiento"
+            className="uppercase tracking-[0.18em] hover:opacity-70 transition"
+          >
+            SEGUIMIENTO
+          </a>
+
         </div>
+
       </div>
-
-      <div className="group">
-
-  <div className="overflow-hidden rounded-[6px] border border-[#ece7e2] w-[420px]">
-  <img
-    src="/casos/flacidez-leve.jpg"
-    alt="Flacidez cutánea leve"
-    className="w-full h-[540px] object-cover"
-  />
-</div>
-
-  <div className="mt-6">
-
-    <p className="uppercase tracking-[0.2em] text-center font-bold text-[11px] text-[#A6564D]">
-      Flacidez leve
-    </p>
-
-    <p className="mt-3 text-[#666]">
-      Mejora del contorno con protocolo 07, nutricosmética y rutina dermocosmética domiciliaria personalizada.
-    </p>
-
-  </div>
-
-</div>
-
-     <div className="group max-w-[420px]">
-  <div className="overflow-hidden rounded-[6px] border border-[#ece7e2]">
-    <img
-      src="/casos/cicatrices-atróficas.jpg"
-      alt="Cicatrices atróficas de acné"
-      className="w-full h-[540px] object-cover"
-    />
-  </div>
-
-  <div className="mt-6">
-    <p className="uppercase tracking-[0.2em] text-center font-bold text-[11px] text-[#A6564D]">
-      Cicatrices atróficas post-acné
-    </p>
-
-    <p className="mt-3 text-[#666]">
-      Recuperación de textura y calidad visual de la piel con nuestro protocolo 06 y rutina dermocosmética para evitar marcas nuevas.
-    </p>
-  </div>
-</div>
-<div className="group max-w-[420px]">
-  <div className="overflow-hidden rounded-[6px] border border-[#ece7e2]">
-    <img
-      src="/casos/daño-solar.png"
-      alt="Fotodaño y pigmentación solar"
-      className="w-full h-[540px] object-cover"
-    />
-  </div>
-
-  <div className="mt-6">
-    <p className="uppercase tracking-[0.2em] text-center font-bold text-[11px] text-[#A6564D]">
-      Pigmentación solar
-    </p>
-
-    <p className="mt-3 text-[#666]">
-      Ajuste de estilo de vida, protocolo 05 y rutina domiciliaria adaptada a su hiperpigmentación.
-    </p>
-  </div>
-</div>
-    </div>
-
-    </div>
-
     </section>
-  </div>
-</section>
-
-<section className="mt-8">
-  <div className="max-w-7xl mx-auto">
-
-    <div className="bg-[#F3EEEA] rounded-[24px] py-20 px-12">
-
-      <div className="grid md:grid-cols-2 gap-20 items-start">
-
-        <div>
-
-          <h3
-            className="text-[48px] md:text-[68px] leading-[0.95] text-[#B98B72]"
-            style={{ fontFamily: 'satoshi' }}
-          >
-            la recuperación
-            <br />
-            es un proceso,
-            <br />
-            no un paso
-          </h3>
-
-        </div>
-
-        <div className="space-y-8 text-[#666]">
-
-          <div className="flex gap-4">
-            <span className="text-[#B05A3C]">•</span>
-            <p>
-              La velocidad de recuperación depende del tipo de alteración,
-              historial y estado actual de la piel.
-            </p>
-          </div>
-
-          <div className="flex gap-4">
-            <span className="text-[#B05A3C]">•</span>
-            <p>
-              Muchas pieles muestran cambios visibles desde las primeras fases
-              del proceso.
-            </p>
-          </div>
-
-          <div className="flex gap-4">
-            <span className="text-[#9c8578]">•</span>
-            <p>
-              Nuestro objetivo es construir resultados estables y duraderos,
-              no mejoras temporales.
-            </p>
-          </div>
-
-        </div>
-
       </div>
-
-    </div>
-
-  </div>
-</section>
-
-<div className="w-full flex justify-center overflow-hidden">
-  <h2
-    className="
-      text-center
-      text-[180px]
-      md:text-[220px]
-      leading-none
-      tracking-[-0.08em]
-      opacity-[0.04]
-      whitespace-nowrap
-      select-none
-      pointer-events-none
-    "
-    
-  >
-      <span className="font-medium">the </span>
-<span className="font-semibold">skin</span>
-<span className="font-medium"> fix™</span>
-  </h2>
-</div>
     </main>
   );
 }

@@ -2,124 +2,160 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
 
 export default function WelcomeGuide() {
   const [open, setOpen] = useState(false);
+  
 
   useEffect(() => {
+  const seen = sessionStorage.getItem("welcomeShown");
+
+  if (!seen) {
     setOpen(true);
-  }, []);
+  }
+}, []);
 
   const closeGuide = () => {
-    setOpen(false);
-  };
+ sessionStorage.setItem("welcomeShown", "true");
+  setOpen(false);
+};
+  
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-md p-6">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-md p-3 sm:p-6 overflow-y-auto">
 
-      <div className="w-full max-w-[620px] rounded-[32px] bg-[#FAF8F5] p-10 shadow-2xl">
+      <div className="w-full max-w-[620px] rounded-[6px] bg-[#FAF8F5] px-6 py-5 sm:px-10 sm:py-6 shadow-2xl max-h-[94dvh] overflow-y-auto my-auto">
+        
 
-        {/* LOGO */}
-<div className="flex justify-center mb-10">
+
+<div className="py-8">
+
+  <div className="flex flex-col items-center mb-12">
+
   <Image
-  src="/tsf-logo.png"
-  alt="The Skin Fix"
-  width={0}
-  height={0}
-  sizes="100vw"
-  className="w-[320px] h-auto"
-/>
+    src="/tsf-logo.png"
+    alt="The Skin Fix"
+    width={220}
+    height={60}
+    className="h-auto w-[220px]"
+  />
+
+  <p className="mt-3 text-[12px] uppercase tracking-[0.25em] text-[#5B5047]">
+    RECUPERACIÓN CUTÁNEA
+  </p>
+
 </div>
 
+  {/* INTRODUCCIÓN EDITORIAL */}
 
-        <div className="mt-2 text-center">
-          <p className="text-[#5B5047]">
-            NO TRATAMOS SÍNTOMAS
-          </p>
+<div className="mt-2 mb-8">
 
-          <p className="font-medium text-[#5B5047]">
-            CORREGIMOS CAUSAS
-          </p>
-        </div>
+  {/* 01 — EXPLORA */}
+  <motion.div
+    initial={{ opacity: 0, y: 8 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 1.0, duration: 1.2, ease: "easeOut" }}
+    className="grid grid-cols-[36px_minmax(0,1fr)] gap-5 border-b border-[#E9E3DD] py-6"
+  >
+    <span className="pt-0.5 font-mono text-xs text-[#C99479]">
+      01
+    </span>
 
-        <div className="my-8 h-px bg-[#E7DDD4]" />
-
-        {/* PASOS */}
-
-        <div className="relative pl-16">
-
-  <div className="absolute left-[18px] top-4 bottom-4 w-px bg-[#D8C4B5]" />
-
-  <div className="space-y-8">
-
-    <div className="relative">
-      <div className="absolute -left-16 top-0 flex h-9 w-9 items-center justify-center rounded-full bg-[#E8D8CB] text-[#5B5047] font-semibold">
-        1
-      </div>
-
-      <h3 className="text-sm uppercase tracking-[0.25em] text-[#B98B72] font-semibold">
+    <div>
+      <h3 className="text-sm font-medium tracking-tight text-[#252321]">
         Explora
       </h3>
 
-      <p className="mt-2 text-[#5B5047]">
-        Descubre cómo trabajamos y qué podemos hacer por tu piel.
+      <p className="mt-1.5 max-w-sm text-sm leading-6 text-[#756D66]">
+        Conoce nuestra filosofía, nuestros tratamientos y cómo trabajamos.
       </p>
     </div>
+  </motion.div>
 
-    <div className="relative">
-      <div className="absolute -left-16 top-0 flex h-9 w-9 items-center justify-center rounded-full bg-[#E8D8CB] text-[#5B5047] font-semibold">
-        2
-      </div>
+  {/* 02 — ELIGE */}
+  <motion.div
+    initial={{ opacity: 0, y: 8 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 2.2, duration: 1.2, ease: "easeOut" }}
+    className="grid grid-cols-[36px_minmax(0,1fr)] gap-5 border-b border-[#E9E3DD] py-6"
+  >
+    <span className="pt-0.5 font-mono text-xs text-[#C99479]">
+      02
+    </span>
 
-      <h3 className="text-sm uppercase tracking-[0.25em] text-[#B98B72] font-semibold">
-        Elige tu plan
+    <div>
+      <h3 className="text-sm font-medium tracking-tight text-[#252321]">
+        Elige tu nivel de acompañamiento
       </h3>
 
-      <p className="mt-2 text-[#5B5047]">
-        Selecciona el nivel de acompañamiento que mejor se adapte a ti.
+      <p className="mt-1.5 max-w-sm text-sm leading-6 text-[#756D66]">
+        Decide cómo quieres abordar la recuperación de tu piel.
       </p>
     </div>
+  </motion.div>
 
-    <div className="relative">
-      <div className="absolute -left-16 top-0 flex h-9 w-9 items-center justify-center rounded-full bg-[#E8D8CB] text-[#5B5047] font-semibold">
-        3
-      </div>
+  {/* 03 — CONTACTA */}
+  <motion.div
+    initial={{ opacity: 0, y: 8 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 3.4, duration: 1.2, ease: "easeOut" }}
+    className="grid grid-cols-[36px_minmax(0,1fr)] gap-5 border-b border-[#E9E3DD] py-6"
+  >
+    <span className="pt-0.5 font-mono text-xs text-[#C99479]">
+      03
+    </span>
 
-      <h3 className="text-sm uppercase tracking-[0.25em] text-[#B98B72] font-semibold">
-        Contacta con nosotros
+    <div>
+      <h3 className="text-sm font-medium tracking-tight text-[#252321]">
+        Cuéntanos tu caso
       </h3>
 
-      <p className="mt-2 text-[#5B5047]">
-        Resolveremos tus dudas y te ayudaremos a comenzar.
+      <p className="mt-1.5 max-w-sm text-sm leading-6 text-[#756D66]">
+        Contacta con nosotros para resolver tus dudas y orientarte.
       </p>
     </div>
+  </motion.div>
 
-    <div className="relative">
-      <div className="absolute -left-16 top-0 flex h-9 w-9 items-center justify-center rounded-full bg-[#E8D8CB] text-[#5B5047] font-semibold">
-        4
-      </div>
+  {/* 04 — RECUPERA */}
+  <motion.div
+    initial={{ opacity: 0, y: 8 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 4.6, duration: 1.2, ease: "easeOut" }}
+    className="grid grid-cols-[36px_minmax(0,1fr)] gap-5 py-6"
+  >
+    <span className="pt-0.5 font-mono text-xs text-[#C99479]">
+      04
+    </span>
 
-      <h3 className="text-sm uppercase tracking-[0.25em] text-[#B98B72] font-semibold">
-        Comienza tu recuperación
+    <div>
+      <h3 className="text-sm font-medium tracking-tight text-[#252321]">
+        Empieza tu recuperación
       </h3>
 
-      <p className="mt-2 text-[#5B5047]">
-        Diseñaremos el camino más adecuado para tu piel.
+      <p className="mt-1.5 max-w-sm text-sm leading-6 text-[#756D66]">
+        Define el camino más adecuado para las necesidades de tu piel.
       </p>
     </div>
-
-  </div>
+  </motion.div>
 
 </div>
 
-        <button
-          onClick={closeGuide}
-          className="mt-10 w-full rounded-full bg-[#C79A7B] py-4 text-sm font-medium uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-[1.02]"
-        >
-          Comenzar
-        </button>
+  <button
+    onClick={closeGuide}
+    className="mt-2 w-full rounded-full bg-[#D0A48E] py-3 text-sm font-medium uppercase tracking-[0.2em] text-white"
+  >
+    Descubre
+  </button>
+
+</div>
+
+
+
+        
 
       </div>
 

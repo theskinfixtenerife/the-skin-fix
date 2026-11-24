@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 :root {
@@ -172,10 +173,11 @@ details[open] summary span {
 
 @font-face {
   font-family: "Satoshi";
-  src: url("/fonts/Satoshi-Black.otf") format("opentype");
+  src: url("/fonts/Satoshi-Black%2011.02.58.otf") format("opentype");
   font-weight: 900;
   font-style: normal;
 }
+
 html,
 body {
   font-family: "Satoshi", sans-serif;
@@ -186,7 +188,6 @@ body {
 }
 html,
 body,
-p,
 span,
 div,
 a,
@@ -202,4 +203,233 @@ h4,
 h5,
 h6 {
   font-family: "Satoshi", sans-serif !important;
+}
+.club-gold {
+
+  background: linear-gradient(
+  100deg,
+  #F3E9DC 0%,
+  #DCCDBE 18%,
+  #C7AE91 36%,
+  #FFF8F2 50%,
+  #C7AE91 64%,
+  #DCCDBE 82%,
+  #F3E9DC 100%
+);
+
+background-size: 380% 100%;
+
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
+text-shadow:
+  0 0 8px rgba(255,255,255,.08),
+  0 0 14px rgba(255,255,255,.04);
+
+  animation: goldShine 8s ease-in-out infinite;
+
+}
+@keyframes goldShine {
+
+  0% {
+    background-position: -250% 0;
+  }
+
+  45% {
+    background-position: -250% 0;
+  }
+
+  60% {
+    background-position: 250% 0;
+  }
+
+  100% {
+    background-position: 250% 0;
+  }
+
+}
+.club-card {
+  position: relative;
+  overflow: visible;
+  border-radius: 40px;
+
+  background:
+    radial-gradient(
+      circle at 8% 8%,
+      rgba(255, 245, 230, .08) 0%,
+      transparent 18%
+    ),
+
+    radial-gradient(
+      circle at 92% 92%,
+      rgba(255, 245, 230, .06) 0%,
+      transparent 22%
+    ),
+
+    linear-gradient(
+      155deg,
+      #765349 0%,
+      #563B36 48%,
+      #392925 100%
+    );
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+.club-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-1px;
+
+    border-radius:40px;
+
+    padding:1px;
+
+   background: linear-gradient(
+  100deg,
+  #4A332A 0%,
+  #6A4B3F 25%,
+  #8D7263 50%,
+  #6A4B3F 75%,
+  #4A332A 100%
+);
+
+    background-size:250% 100%;
+
+    animation:borderShine 12s ease-in-out infinite;
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+    mask-composite:exclude;
+
+    pointer-events:none;
+
+}
+@keyframes borderShine{
+
+    0%{
+        background-position:-250% 0;
+    }
+
+    60%{
+        background-position:-250% 0;
+    }
+
+    100%{
+        background-position:250% 0;
+    }
+
+}
+@font-face {
+  font-family: "Thasadith";
+  src: url("/fonts/Thasadith-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Thasadith";
+  src: url("/fonts/Thasadith-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Thasadith";
+  src: url("/fonts/Thasadith-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Thasadith";
+  src: url("/fonts/Thasadith-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+
+}.font-thasadith {
+  font-family: "Thasadith", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+.plan-card-title {
+  font-family: "Satoshi", sans-serif !important;
+  font-weight: 900 !important;
+}
+
+.plan-card-content,
+.plan-card-content * {
+  font-family: "Thasadith", sans-serif !important;
+}
+
+.plan-card-content .plan-card-title {
+  font-family: "Satoshi", sans-serif !important;
+  font-weight: 900 !important;
+}
+
+.plan-card-content.plan-card-libre {
+  background: linear-gradient(155deg, #FFF9ED 0%, #EADBC6 100%) !important;
+  border-color: #D6C1A6 !important;
+}
+
+.plan-card-content.plan-card-libre:hover {
+  border-color: #B27A4F !important;
+}
+
+.plan-card-content.plan-card-guided {
+  background: linear-gradient(155deg, #FFF5E8 0%, #EBCBA9 100%) !important;
+  border-color: #C6946C !important;
+}
+
+.plan-card-content.plan-card-libre .plan-card-title,
+.plan-card-content.plan-card-guided .plan-card-title {
+  color: #87563D !important;
+}
+
+.skin-price-tab {
+  background-color: #9E6849 !important;
+}
+
+.skin-price-tab-club {
+  background-color: #C28F67 !important;
+}
+
+.skin-plan-badge {
+  background-color: #7A3F2D !important;
+  border-color: #7A3F2D !important;
+}
+
+.skin-plan-check {
+  background-color: rgba(183, 129, 81, 0.18) !important;
+  color: #9E6849 !important;
+}
+
+.plan-card-content .plan-card-description {
+  font-family: "Satoshi", sans-serif !important;
+  font-weight: 500 !important;
+}
+
+.plan-card-content .plan-card-cta-label {
+  font-family: "Satoshi", sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.plan-reserve-button {
+  background: #9E6849 !important;
+  border-color: #D6C1A6 !important;
+  box-shadow: 0 8px 20px rgba(101, 66, 43, 0.22) !important;
+}
+
+.club-card .plan-reserve-button {
+  background: #C28F67 !important;
+  border-color: #E2C4A5 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28) !important;
 }

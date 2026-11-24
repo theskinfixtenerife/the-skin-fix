@@ -6,26 +6,47 @@ import { motion } from "framer-motion"
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation"
 import WelcomeGuide from "./components/WelcomeGuide"
+import PlanesModal from "./PlanesModal";
+import { Thasadith } from "next/font/google";
+const thasadith = Thasadith({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default function TheSkinFixWebsite() {
+  const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.6, ease: "easeOut" },
+};
+  const [mensaje, setMensaje] = useState("");
   const [open, setOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(0)
   const [cellsGlow, setCellsGlow] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [messageIndex, setMessageIndex] = useState(0)
+  const messages = [
+  "PRIMER CENTRO DE RECUPERACIÓN CUTÁNEA DE ESPAÑA",
+  "TU PIEL SABE RECUPERARSE SOLA. NOSOTROS LA AYUDAMOS",
+  "RECUPERAMOS TU PIEL POR DENTRO, NO SOLO SU ASPECTO",
+];
   const [paused, setPaused] = useState(false)
   const [showPrice1, setShowPrice1] = useState(false)
 const [showPrice2, setShowPrice2] = useState(false)
 const [showPrice3, setShowPrice3] = useState(false)
 const [showTerms, setShowTerms] = useState(false)
+const [isMinimized, setIsMinimized] = useState(true);
 const [position, setPosition] = useState(0)
 const [dragging, setDragging] = useState(false)
-
+const [isOpen, setIsOpen] = useState(false);
 const [positionGuiado, setPositionGuiado] = useState(0)
 const [draggingGuiado, setDraggingGuiado] = useState(false)
-
+const [protocolSelected, setProtocolSelected] = useState(false);
 const [positionClub, setPositionClub] = useState(0)
 const [draggingClub, setDraggingClub] = useState(false)
+const [activeProtocol, setActiveProtocol] = useState(-1)
+const [unlockedProtocol, setUnlockedProtocol] = useState(0);
 
 
 // ---------- PLAN LIBRE ----------
@@ -52,17 +73,31 @@ const handleMove = (e: any) => {
   setPosition(newPosition)
 }
 
+const triggerPlanLibre = () => {
+  setPosition(220)
+  setTimeout(() => {
+    window.open(
+      "https://wa.me/34618820842?text=Hola%20Ana,%20me%20interesa%20el%20PLAN%20LIBRE%20en%20cabina%20(Tenerife).%20%C2%BFCu%C3%A1ndo%20tendr%C3%ADais%20disponibilidad%3F",
+      "_blank"
+    )
+    setPosition(0)
+  }, 220)
+}
+
 const handleEnd = () => {
   setDragging(false)
 
-  if (position > 180) {
+  if (position > 160) {
     window.open(
-      "https://wa.me/34618820842?text=Hola,%20me%20interesa%20el%20PLAN%20LIBRE.%20%C2%BFCu%C3%A1ndo%20tendr%C3%ADais%20disponibilidad%3F",
+      "https://wa.me/34618820842?text=Hola%20Ana,%20me%20interesa%20el%20PLAN%20LIBRE%20en%20cabina%20(Tenerife).%20%C2%BFCu%C3%A1ndo%20tendr%C3%ADais%20disponibilidad%3F",
       "_blank"
     )
+    setPosition(0)
+  } else if (position < 15) {
+    triggerPlanLibre()
+  } else {
+    setPosition(0)
   }
-
-  setPosition(0)
 }
 
 // ---------- PLAN GUIADO ----------
@@ -89,17 +124,31 @@ const handleMoveGuiado = (e: any) => {
   setPositionGuiado(newPosition)
 }
 
+const triggerPlanGuiado = () => {
+  setPositionGuiado(220)
+  setTimeout(() => {
+    window.open(
+      "https://wa.me/34618820842?text=Hola%20Ana,%20me%20interesa%20el%20PLAN%20GUIADO%20(Valoraci%C3%B3n%20+%20Corneometr%C3%ADa).%20%C2%BFCu%C3%A1ndo%20tendr%C3%ADais%20disponibilidad%3F",
+      "_blank"
+    )
+    setPositionGuiado(0)
+  }, 220)
+}
+
 const handleEndGuiado = () => {
   setDraggingGuiado(false)
 
-  if (positionGuiado > 180) {
+  if (positionGuiado > 160) {
     window.open(
-      "https://wa.me/34618820842?text=Hola,%20me%20interesa%20el%20PLAN%20GUIADO.%20%C2%BFCu%C3%A1ndo%20tendr%C3%ADais%20disponibilidad%3F",
+      "https://wa.me/34618820842?text=Hola%20Ana,%20me%20interesa%20el%20PLAN%20GUIADO%20(Valoraci%C3%B3n%20+%20Corneometr%C3%ADa).%20%C2%BFCu%C3%A1ndo%20tendr%C3%ADais%20disponibilidad%3F",
       "_blank"
     )
+    setPositionGuiado(0)
+  } else if (positionGuiado < 15) {
+    triggerPlanGuiado()
+  } else {
+    setPositionGuiado(0)
   }
-
-  setPositionGuiado(0)
 }
 
 
@@ -127,47 +176,130 @@ const handleMoveClub = (e: any) => {
   setPositionClub(newPosition)
 }
 
+const triggerPlanClub = () => {
+  setPositionClub(220)
+  setTimeout(() => {
+    window.open(
+      "https://wa.me/34618820842?text=Hola%20Ana,%20me%20gustar%C3%ADa%20informaci%C3%B3n%20para%20unirme%20a%20theskinfix%20CLUB.%20%C2%BFCu%C3%A1ndo%20podr%C3%ADamos%20hablar%3F",
+      "_blank"
+    )
+    setPositionClub(0)
+  }, 220)
+}
+
 const handleEndClub = () => {
   setDraggingClub(false)
 
-  if (positionClub > 180) {
+  if (positionClub > 160) {
     window.open(
-      "https://wa.me/34618820842?text=Hola,%20me%20interesa%20the%20skin%20fix%20CLUB.%20%C2%BFCu%C3%A1ndo%20tendr%C3%ADais%20disponibilidad%3F",
+      "https://wa.me/34618820842?text=Hola%20Ana,%20me%20gustar%C3%ADa%20informaci%C3%B3n%20para%20unirme%20a%20theskinfix%20CLUB.%20%C2%BFCu%C3%A1ndo%20podr%C3%ADamos%20hablar%3F",
       "_blank"
     )
+    setPositionClub(0)
+  } else if (positionClub < 15) {
+    triggerPlanClub()
+  } else {
+    setPositionClub(0)
   }
-
-  setPositionClub(0)
 }
+useEffect(() => {
+  if (paused) return;
 
+  const interval = setInterval(() => {
+    setMessageIndex((prev) => (prev + 1) % messages.length);
+  }, 6000);
 
+  return () => clearInterval(interval);
+}, [paused, messages.length]);
+const protocols = [
+  {
+    code: "P01",
+    title: "Acné y piel congestionada",
+    text: "Ayudamos a limpiar los poros obstruidos y a controlar el exceso de sebo, para que la piel recupere un aspecto más limpio e higiénico."
+  },
+  {
+    code: "P02",
+    title: "Inflamación y sensibilidad",
+    text: "Enfocamos el cuidado en calmar la piel reactiva y reforzar su barrera, ayudando a reducir la sensación de irritación y a mejorar su confort."
+  },
+  {
+    code: "P03",
+    title: "Hidratación y luminosidad",
+    text: "Aportamos hidratación profunda para devolverle luminosidad y jugosidad a la piel cuando se ve apagada o deshidratada."
+  },
+  {
+    code: "P04",
+    title: "Textura y poros",
+    text: "Cuando la piel está preparada, trabajamos para suavizar su textura y mejorar el aspecto de los poros."
+  },
+  {
+    code: "P05",
+    title: "Manchas y pigmentación",
+    text: "Trabajamos para mejorar el aspecto de las manchas y unificar el tono sin agredir la piel."
+  },
+  {
+    code: "P06",
+    title: "Cicatrices y marcas",
+    text: "Trabajamos para mejorar la textura de la piel y el aspecto de cicatrices, marcas y estrías de forma progresiva."
+  },
+  {
+    code: "P07",
+    title: "Elasticidad y regeneración",
+    text: "Seguimos trabajando la firmeza y la elasticidad de la piel para acompañar su regeneración y rejuvenecimiento a largo plazo."
+  }
+]
 
   return (
      <>
     <WelcomeGuide />
-    <div className="min-h-screen bg-bg-white text-[#171412] font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#FFFEFC] text-[#2C2725] font-sans overflow-x-hidden">
 
       {/* HERO */}
-<section className="relative min-h-screen px-17 pt-38 pb-8">
+<section className="relative min-h-screen px-4 pt-38 pb-8 sm:px-6 lg:px-16 mb-4 sm:mb-6 lg:mb-8">
 
-        <div className="relative min-h-[70vh] overflow-hidden rounded-[4px]">
-
+        <motion.div
+  initial={{
+    opacity: 0,
+    scaleY: 0.02,
+    filter: "brightness(3) blur(6px)",
+  }}
+  animate={{
+    opacity: 1,
+    scaleY: 1,
+    filter: "brightness(1) blur(0px)",
+  }}
+  transition={{
+    duration: 1.15,
+    ease: [0.22, 1, 0.36, 1],
+  }}
+  style={{ transformOrigin: "center" }}
+  className="relative min-h-[70vh] overflow-hidden rounded-[16px]"
+>
   <video
     src="/hero-video.mp4"
     autoPlay
     muted
     playsInline
     onLoadedMetadata={(e) => {
-      e.currentTarget.currentTime = 19
+      e.currentTarget.currentTime = 19;
     }}
     onEnded={(e) => {
-      e.currentTarget.currentTime = 19
-      e.currentTarget.play()
+      e.currentTarget.currentTime = 19;
+      e.currentTarget.play();
     }}
     className="absolute inset-0 w-full h-full object-cover object-[100%_50%]"
   />
 
-</div>
+  <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#2C211B]/65 via-[#2C211B]/25 to-transparent" />
+
+  <motion.div
+    initial={{ opacity: 0.9, scaleY: 0 }}
+    animate={{ opacity: 0, scaleY: 20 }}
+    transition={{ duration: 0.45, ease: "easeOut" }}
+    className="absolute inset-0 bg-white mix-blend-screen pointer-events-none"
+    style={{ transformOrigin: "center" }}
+  />
+</motion.div>
 
        {/* 
 <div className="fixed top-[32px] left-0 w-full h-[90px] bg-[#B4A89C]">
@@ -175,18 +307,10 @@ const handleEndClub = () => {
 </div>
 */}
 
-<div className="mx-9 fixed top-15 left-8 right-8 h-[32px] rounded-[4px] bg-[#D9D2CA] z-50 flex items-center justify-center">
-  <div className="h-[32px] bg-[#D9D2CA] rounded-t-[20px] flex items-center justify-center">
-
-  <span className="text-[11px] tracking-[0.18em] text-[#6B635D]">
-    {messageIndex === 0 ? (
-      "TU PIEL SABE RECUPERARSE SOLA. NOSOTROS LA AYUDAMOS."
-    ) : (
-      <>
-        SOLICITA TU ACCESO EN the<strong>skin</strong>fix™{" "}
-        <span className="font-bold">CLUB</span>
-      </>
-    )}
+<div className="fixed top-15 left-4 right-4 h-[32px] rounded-[4px] border border-[#D9D2CA] bg-transparent z-50 flex items-center justify-center sm:left-6 sm:right-6 lg:left-16 lg:right-16">
+<div className="h-[32px] flex items-center justify-center px-4 bg-transparent">
+  <span className="text-[10px] tracking-[0.18em] text-[#6B635D]">
+    {messages[messageIndex]}
   </span>
 
   <button
@@ -198,45 +322,41 @@ const handleEndClub = () => {
   </div>
 </div>
         {/* HEADER */}
-        <header className="fixed top-[80px] ml-12 left-0 w-full z-50 flex items-center justify-between h-[90px]">
+        <header className="fixed top-[42px] md:top-[75px] left-0 w-full z-50 flex items-center justify-between h-[65px] md:h-[85px] px-4 sm:px-6 lg:px-16 pointer-events-none">
 
-          <div className="flex items-center gap-4">
-  <img
-    src="/tsf-isotipo.png"
-    alt="THE SKIN FIX"
-    className="ml-16 w-[60px] h-auto object-contain"
-  />
-<div className="flex items-center">
-  <div>
-  <span className="font-satoshi text-[#B98B72] text-[28px] leading-none">
-  the<strong>skin</strong>fix™
-</span>
-</div>
+          <div className="pointer-events-auto flex items-center gap-4">
+            <Link href="/" className="flex items-center gap-3">
+              
+<Image
+  src="/tsf-logo.png"
+  alt="the skin fix"
+  width={110}
+  height={25}
+  className="h-[18px] sm:h-[22px] md:h-[25px] w-auto object-contain"
+  priority
+/>
 
-  
-
-  
-</div>
-</div>
-<div className="hidden md:flex items-center font-bold gap-4 text-[13px] uppercase tracking-[0.22em] text-[#B98B72] ml-auto mr-49">
+            </Link>
+          </div>
+<div className="pointer-events-auto hidden md:flex items-center font-bold gap-7 text-[17px] tracking-[0.12em] text-[#000000] ml-auto">
 
   <Link
   href="/diagnostico"
-  className="flex items-center transition-all duration-300 hover:scale-110 active:scale-90"
+  className="flex items-center mix-blend-difference transition-all duration-300 hover:scale-110 active:scale-90"
 >
   Diagnóstico
 </Link>
-<div className="w-px h-4 bg-[#B98B72]"></div>
+
 <Link
   href="/protocolo"
-  className="flex items-center transition-all duration-300 hover:scale-110 active:scale-90"
+  className="flex items-center mix-blend-difference transition-all duration-300 hover:scale-110 active:scale-90"
 >
   Protocolo
 </Link>
-<div className="w-px h-4 bg-[#B98B72]"></div>
+
 <Link
   href="/seguimiento"
-  className="flex items-center transition-all duration-300 hover:scale-110 active:scale-90"
+  className="flex items-center mix-blend-difference transition-all duration-300 hover:scale-110 active:scale-90"
 >
   Seguimiento
 </Link>
@@ -245,17 +365,18 @@ const handleEndClub = () => {
         </header>
 
         {/* CONTENT */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center pt-10 md:pt-1">
+        <div className="relative z-10 flex-1 flex flex-col justify-center pt-4 md:pt-1">
 
-          <div className="max-w-5xl -mt-55">
-
+          <div className="max-w-5xl ml-10 -mt-135 px-2 md:px-0">
             <h1
-className="text-[48px] sm:text-[74px] md:text-[60px] leading-[0.90] tracking-[-0.03em] normal-case max-w-6xl text-[#2C2725]"
-style={{ fontFamily: 'satoshi', fontWeight: 400 }}
->
-            
+              className="max-w-5xl text-[clamp(2.75rem,7.5vw,6rem)] leading-[0.86] tracking-[-0.055em] text-[#FFF9ED] [text-shadow:0_4px_28px_rgba(35,24,17,0.25)]"
+              style={{ fontFamily: "Satoshi", fontWeight: 900 }}
+            >
+              <span className="block">TU PIEL</span>
+              <span className="block">M∆S F∆CIL</span>
+              <span className="block">QUE NUNC∆</span>
             </h1>
-           
+            
           </div>
 
         </div>
@@ -272,191 +393,249 @@ style={{ fontFamily: 'satoshi', fontWeight: 400 }}
 {/* <div className="absolute inset-0 bg-[#FAF8F5]/40 z-0" /> */}
         
 
-<div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+<div className="absolute bottom-14 md:bottom-16 left-1/2 -translate-x-1/2 z-20">
 
   <button
-    onClick={() => setOpen(true)}
-    onMouseEnter={() => setCellsGlow(true)}
+  onClick={() => setOpen(true)}
+  onMouseEnter={() => setCellsGlow(true)}
   onMouseLeave={() => setCellsGlow(false)}
-    className="relative z-10 rounded-full bg-[#B4A89C] opacity-0 animate-fadeIn
-hover:bg-[#A6564D]
-text-white
-shadow-[0_0_80px_rgba(166,86,77,0.45)] px-10 py-5 text-[11px] uppercase tracking-[0.3em] text-white hover:bg-[#A6564D]
-hover:tracking-[0.35em]
-transition-all duration-500"
-style={{ animationDelay: "3s" }}
-  >
-    Comenzar mi recuperación
-  </button>
-
-</div>
-
-</section>
-
-      {/* FILOSOFÍA */}
-      <section className="px-6 md:px-8 pt-16 -mt-17 pb-20 bg-white">
-
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start max-w-[1300px] mx-auto w-full bg-[#F5F2EE] rounded-[6px] p-10 md:p-16">
-
-  <div className="pt-8">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-[#B98B72] mb-5">
-            filosofía
-          </p>
-
-          <h2 className="text-[12px] text-[48px] sm:text-[74px] md:text-[60px] leading-[0.92] tracking-[-0.06em] text-[#B88A72] font-bold mb-14">
-            recuperación
-            <br />
-            cutánea definitiva
-          </h2>
-
-          <div className="max-w-[500px] space-y-6 text-[16px] leading-[1.8] text-[#5E534A] font-normal">
-
-  <p>
-  ¿Y si el problema no fuera tu piel?
-</p>
-
-<p>
-  Durante años hemos buscado soluciones para la piel sin comprender realmente por qué había dejado de funcionar correctamente.
-</p>
-
-<p>
-  Sin embargo, la recuperación rara vez depende de hacer más, sino de hacer lo necesario.
-</p>
-
-<p>
-the<strong>skin</strong>fix™ parte de una pregunta diferente:
-</p>
-
-<p>
-  ¿Qué necesita la piel <br />
-  para volver a funcionar <br />
-  por sí sola?
-</p>
-</div>
-</div>
-
-        <div className="relative flex items-center justify-center w-full h-full rounded-[6px] bg-[#FAF8F5] overflow-hidden">
-  <Image
-    src="/casos/logobonito.webp"
-    alt="theskinfix"
-    width={500}
-    height={500}
-    priority
-    className="w-full
-h-full
-object-cover"
-  />
-</div>
-
-</div>
-{/* FOTO EDITORIAL */}
-
-<section className="relative px-6 md:px-20 py-16 bg-white">
-  <div className="max-w-[450px] mr-[220px]">
-    <div className="relative h-[600px] overflow-hidden left-[-41px] rounded-[6px]">
-      <Image
-  src="/balsamo-theskinfix.jpg"
-  alt="The Skin Fix"
-  fill
-  quality={100}
-  className="object-cover object-[10%_center]"
- />
-    </div>
-  </div>
-  
-  <div className="absolute left-[580px] top-[65px]">
-    <div className="flex gap-4"></div>
-{/* Imagen secundaria */}
-  <div className="relative w-[160px] h-[320px] top-[280px] left-[210px] rounded-[6px] overflow-hidden">
-    <Image
-      src="/casos/brazos.webp"
-      alt="Queratosis pilaris"
-      fill
-      className="object-cover"
-    />
-  </div>
-
-  <motion.div
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }}
-  viewport={{ once: true, amount: 0.5 }}
-  className="mt-14"
+  className="group relative z-10 inline-flex items-center justify-center gap-3 rounded-full border border-[#F2DCC5]/55 bg-[#A86F56] px-9 py-4 text-[12px] font-bold uppercase tracking-[0.18em] text-white opacity-0 shadow-[0_12px_34px_rgba(90,55,35,0.28),inset_0_1px_0_rgba(255,255,255,0.18)] animate-fadeIn transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#8F5C45] hover:shadow-[0_16px_40px_rgba(90,55,35,0.34)]"
+  style={{ animationDelay: "2s" }}
 >
-  <TypeAnimation
-    sequence={[
-      1000,
-      "TRATAMOS\nLO QUE\nOTROS \nNO."
-    ]}
-    speed={10}
-    cursor={true}
-    repeat={0}
-    style={{
-      whiteSpace: "pre-line",
-      display: "block",
-      fontSize: "24px",
-      lineHeight: "0.92",
-      letterSpacing: "-0.06em",
-      fontWeight: 700,
-      color: "#B98B72",
-      fontFamily: "Satoshi"
-    }}
-  />
-</motion.div>
-<div className="absolute left-[500px] top-[310px] w-[250px] h-[220px] rounded-[6px] overflow-hidden">
-  <Image
-    src="/casos/cuello.webp"
-    alt="Cicatrices"
-    fill
-    className="object-cover"
-  />
+  <span>ELIGE TU PLAN</span>
+</button>
+
 </div>
-<div className="absolute left-[430px] top-0 w-[320px] h-[220px] rounded-[6px] overflow-hidden">
-  <Image
-    src="/casos/espalda.webp"
-    alt="Espalda"
-    fill
-    className="object-cover"
-  />
-</div>
-<div className="absolute left-[-2px] top-0 w-[340px] h-[220px] rounded-[6px] overflow-hidden">
-  <Image
-    src="/casos/abdomen.webp"
-    alt="Abdomen"
-    fill
-    className="object-cover"
-  />
-</div>
-</div>
+
 </section>
-      </section>
-      <section className="-mt-1 pb-24">
-  <div className="max-w-7xl mx-auto px-6">
 
-    <div className="mb-20">
-      <p className="text-xs uppercase tracking-[0.3em] text-[#B88A72] mb-4">
-        Testimonios
-      </p>
+{/* ================= EL MÉTODO THE SKIN FIX ================= */}
 
-      <h2 className="text-[64px] leading-[0.9] font-black text-[#B88A72] mb-6">
-        historias reales<br />
-        de recuperación
-      </h2>
+<section className="mx-4 my-4 rounded-[16px] bg-[#FAF8F5] py-20 sm:mx-6 sm:my-6 sm:py-24 lg:mx-16 lg:my-8 lg:py-28">
+  <div className="max-w-7xl mx-auto px-6 lg:px-16">
+
+    <div className="grid items-end gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div>
+        
+    <motion.h2
+  initial={{ opacity: 0, y: 24 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.2 }}
+  transition={{
+  duration: 1.2,
+  delay: 0.35,
+  ease: [0.22, 1, 0.36, 1]
+}}
+  className="
+    text-5xl
+    lg:text-[54px]
+    leading-[0.9]
+    tracking-[-0.04em]
+    text-[#2C2725]
+    mt-6
+    uppercase
+    mb-0
+    max-w-[620px]
+    [text-shadow:0_0_18px_rgba(44,39,37,0.08),0_0_40px_rgba(44,39,37,0.04)]
+  "
+  style={{ fontFamily: "satoshi", fontWeight: 700 }}
+>
+  EL MÉTODO
+  <br />
+  THESKINFIX
+</motion.h2>
+      </div>
+
+    <motion.div
+  initial={{ opacity: 0, y: 24 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.5 }}
+  transition={{
+    duration: 1.2,
+    delay: 0.35,
+    ease: [0.22, 1, 0.36, 1]
+  }}
+  className="max-w-[620px] text-left text-[17px] leading-[1.65] text-[#5F5852]"
+  style={{ fontFamily: "Satoshi", fontWeight: 400 }}
+>
+  <p>
+  Cada piel necesita un orden propio, por eso, diseñamos una secuencia para priorizar lo que conviene trabajar primero y la ajustamos según su respuesta, buscando acompañar su recuperación con estabilidad y reducir el riesgo de desestabilizaciones o efectos rebote.
+  </p>
+    </motion.div>
+    </div>
+
+
+    <div className="mt-16">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+         
+          
+        </div>
+      
+      </div>
+
+      <div className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4">
+        {protocols.map((protocol, index) => (
+          <button
+            key={protocol.code}
+            type="button"
+            aria-pressed={protocolSelected && activeProtocol === index}
+            onClick={() => {
+              setActiveProtocol(index)
+              setProtocolSelected(true)
+            }}
+            className={`min-h-[88px] rounded-[12px] border p-4 text-left transition-all duration-200 ${
+              protocolSelected && activeProtocol === index
+                ? "border-[#8F5C45] bg-[#8F5C45] text-white shadow-[0_8px_20px_rgba(143,92,69,0.18)]"
+                : "border-[#E8DED5] bg-[#FFFEFC]/80 text-[#2C2725] hover:border-[#C9A58F] hover:bg-white"
+            }`}
+          >
+            <span className="block text-[10px] font-semibold tracking-[0.14em] opacity-75">{protocol.code}</span>
+            <span className="mt-2 block text-[14px] leading-[1.3]">{protocol.title}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {/* DETALLE DEL PROTOCOLO SELECCIONADO */}
+
+{protocolSelected && (
+  <motion.div
+    key={activeProtocol}
+    initial={{ opacity: 0, y: 24 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.45 }}
+    className="mt-6 rounded-[14px] bg-[#E9DCCF] p-6 sm:p-8"
+  >
+  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+    <div className="flex items-center gap-6">
+
+     
+
+      <h3
+        className="text-[25px] lg:text-[25px] tracking-[-0.03em] text-[#2C2725]"
+        style={{ fontFamily: "satoshi", fontWeight: 700 }}
+      >
+        {protocols[activeProtocol].title}
+      </h3>
+
+    </div>
+
+  </div>
+
+  <p className="mt-2 max-w-2xl text-[#5F5852] text-[16px] leading-[1.9]">
+    {protocols[activeProtocol].text}
+  </p>
+
+  </motion.div>
+)}
+    {/* BLOQUE CLAVE */}
+
+
+  </div>
+</section>
+
+{/* ================= biografía ================= */}
+
+<section className="mx-4 my-4 rounded-[16px] bg-[#E9DCCF] py-32 text-[#2C2725] sm:mx-6 sm:my-6 lg:mx-16 lg:my-8">
+  <div className="max-w-7xl mx-auto px-6 lg:px-16">
+
+    <div className="grid lg:grid-cols-2 gap-24 items-center">
+
+
+      {/* TEXTO */}
+
+      <div className="max-w-[620px]">
+        <h2
+  className="
+    text-5xl
+    lg:text-[80px]
+    leading-[0.9]
+    tracking-[-0.04em]
+    text-[#2C2725]
+    mt-6
+    uppercase
+    mb-10
+    max-w-[620px]
+    [text-shadow:0_0_18px_rgba(44,39,37,0.08),0_0_40px_rgba(44,39,37,0.04)]
+  "
+  style={{ fontFamily: "satoshi", fontWeight: 700 }}
+>
+  M∆KE SKIN M∆KE SENSE
+</h2>
+
+        <div className="max-w-[620px] space-y-12 text-[18px] leading-[1.75] text-[#2C2725] text-justify">
+
+          <p style={{ fontFamily: "Satoshi", fontWeight: 400 }}>
+  Abordamos cada piel desde su estado y sus necesidades actuales. Observamos, identificamos qué puede estar alterando su equilibrio y trazamos un plan de cuidado claro, paso a paso. Un enfoque personalizado que busca mejorar la relación con tu piel con constancia, criterio y expectativas realistas.
+</p>
+<div className="-mt-4 flex justify-end">
+  <Image
+    src="/firmasinfondo.png"
+    alt="Firma de Ana Guzmán"
+    width={170}
+    height={60}
+    className="opacity-70 select-none pointer-events-none"
+  />
+</div>
+         
+        </div>
+      
+      </div>
+<motion.div
+  initial={{ opacity: 0, x: 80 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 2, ease: "easeOut" }}
+  className="flex justify-center lg:justify-end"
+>
+        <Image
+          src="/retrato-biografia.webp"
+          alt="Fundadora The Skin Fix"
+          width={520}
+          height={650}
+          className="w-full max-w-[560px] rounded-[6px] object-cover"
+          priority
+        />
+      </motion.div>
+    </div>
+
+  </div>
+</section>
+      <section className="mx-4 my-4 rounded-[16px] bg-[#FAF8F5] py-24 md:py-28 sm:mx-6 sm:my-6 lg:mx-16 lg:my-8">
+  <div className="max-w-7xl mx-auto px-6 lg:px-16">
+
+    <div className="mb-12">
+      
+{/* <RESEÑAS> */}
+      <h2
+  className="text-[40px] sm:text-[46px] lg:text-[54px] leading-[0.95] tracking-[-0.04em] text-[#2C2725] mb-0"
+  style={{ fontFamily: "satoshi", fontWeight: 700 }}
+>
+  NUESTROS CLIENTES
+  <br />
+</h2>
 
     
     </div>
 
-    <div className="grid lg:grid-cols-3 gap-6">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
 
       {/* CARD 1 */}
-      <article className="rounded-[32px] border border-[#E8DDD5] bg-[#FAF8F5] p-10">
-        <span className="text-5xl text-[#D6B7A6] leading-none">"</span>
-
-        <p className="mt-6 text-[#7A6B60] leading-relaxed">
-          En mi primera cita me tranquilizó al momento, explicándome el proceso con todo detalle y cómo me beneficiaría según mi tipo de piel. Los resultados han sido increíbles: en unas pocas semanas mi piel está más suave y luminosa, y las marcas del acné se van desvaneciendo con cada sesión. Me siento mucho más segura y ya no necesito maquillaje para salir.
+      <article className="
+relative flex h-full min-h-[340px] flex-col overflow-hidden rounded-[16px] border border-[#E8DED5] bg-[#FFFEFC] p-8 lg:p-9 shadow-[0_10px_30px_rgba(82,62,48,0.06)]
+">
+        
+        <p
+  className="mb-8 flex-1 text-[17px] text-[#5F5852] leading-[1.8]"
+  style={{ fontFamily: "Thasadith", fontWeight: 400 }}
+>
+          En la primera cita me tranquilizó al momento, explicándome el proceso con todo detalle y cómo me beneficiaría según mi tipo de piel. Los resultados han sido increíbles en pocas semanas mi piel está más suave y luminosa, y las marcas del acné se van desvaneciendo con cada sesión. Me siento mucho más segura y ya no necesito maquillaje para salir.
         </p>
 
-        <div className="mt-10 pt-6 border-t border-[#EEE5DE]">
-          <p className="font-medium text-[#A6564D]">
+        <div className="mt-auto border-t border-[#E8DED5] pt-5">
+          <p className="text-[14px] font-semibold text-[#2C2725]">
             Cliente verificada
           </p>
 
@@ -464,15 +643,20 @@ object-cover"
       </article>
 
       {/* CARD 2 */}
-      <article className="rounded-[32px] border border-[#E8DDD5] bg-[#FAF8F5] p-10">
-        <span className="text-5xl text-[#D6B7A6] leading-none">"</span>
+      <article className="
+relative flex h-full min-h-[340px] flex-col overflow-hidden rounded-[16px] border border-[#E8DED5] bg-[#FFFEFC] p-8 lg:p-9 shadow-[0_10px_30px_rgba(82,62,48,0.06)]
+">
+        
 
-        <p className="mt-6 text-[#7A6B60] leading-relaxed">
-          Me hice una sesión de terapia de luz con Ana y fue una experiencia genial. Me hizo sentir cómodo desde el primer momento y sus conocimientos sobre la piel son impresionantes. El resultado fue muy relajante y mi piel ha mejorado de forma notable.
+        <p
+  className="mb-8 flex-1 text-[17px] text-[#5F5852] leading-[1.8]"
+  style={{ fontFamily: "Thasadith", fontWeight: 400 }}
+>
+          Estoy probando el protocolo para acné y es una experiencia genial. Ana me hizo sentir cómodo desde el primer momento y sus conocimientos sobre la piel son impresionantes. Mi piel ha mejorado muchisimo.
         </p>
 
-        <div className="mt-23 pt-6 border-t border-[#EEE5DE]">
-          <p className="font-medium text-[#A6564D]">
+        <div className="mt-auto border-t border-[#E8DED5] pt-5">
+          <p className="text-[14px] font-semibold text-[#2C2725]">
             Maciej Z.
           </p>
 
@@ -480,15 +664,20 @@ object-cover"
       </article>
 
       {/* CARD 3 */}
-      <article className="rounded-[32px] border border-[#E8DDD5] bg-[#FAF8F5] p-10">
-        <span className="text-5xl text-[#D6B7A6] leading-none">"</span>
+      <article className="
+relative flex h-full min-h-[340px] flex-col overflow-hidden rounded-[16px] border border-[#E8DED5] bg-[#FFFEFC] p-8 lg:p-9 shadow-[0_10px_30px_rgba(82,62,48,0.06)]
+">
+        
 
-        <p className="mt-6 text-[#7A6B60] leading-relaxed">
-          Ana es tan amigable, profesional y conocedora que siempre me hace sentir completamente cómoda durante el tratamiento. Desde la primera cita quedé impresionada con los resultados y con la atención recibida. Definitivamente los recomiendo a mis amigas.
+        <p
+  className="mb-8 flex-1 text-[17px] text-[#5F5852] leading-[1.8]"
+  style={{ fontFamily: "Thasadith", fontWeight: 400 }}
+>
+          Me regalaron una confianza increíble desde la primera cita, quedé impresionada con los resultados y con la atención recibida. Definitivamente la recomiendo.
         </p>
 
-        <div className="mt-23 pt-6 border-t border-[#EEE5DE]">
-          <p className="font-medium text-[#A6564D]">
+        <div className="mt-auto border-t border-[#E8DED5] pt-5">
+          <p className="text-[14px] font-semibold text-[#2C2725]">
             Oana C.
           </p>
 
@@ -497,15 +686,20 @@ object-cover"
       </article>
 
       {/* CARD 4 */}
-      <article className="rounded-[32px] border border-[#E8DDD5] bg-[#FAF8F5] p-10">
-        <span className="text-5xl text-[#D6B7A6] leading-none">"</span>
+      <article className="
+relative flex h-full min-h-[340px] flex-col overflow-hidden rounded-[16px] border border-[#E8DED5] bg-[#FFFEFC] p-8 lg:p-9 shadow-[0_10px_30px_rgba(82,62,48,0.06)]
+">
+        
 
-        <p className="mt-6 text-[#7A6B60] leading-relaxed">
-          Llevo más de diez años visitando clínicas estéticas y desde que descubrí a Ana no he cambiado. Es encantadora, muy fácil de tratar y los resultados hablan por sí solos. Cada sesión me voy con la sensación de que me cuidan de verdad.
+        <p
+  className="mb-8 flex-1 text-[17px] text-[#5F5852] leading-[1.8]"
+  style={{ fontFamily: "Thasadith", fontWeight: 400 }}
+>
+          Llevo más de diez años visitando clínicas estéticas y desde que descubrí TSF no he cambiado. Profesional, muy fácil de tratar y los resultados hablan por sí solos. Cada sesión me voy con la sensación de que me cuidan de verdad.
         </p>
 
-        <div className="mt-10 pt-6 border-t border-[#EEE5DE]">
-          <p className="font-medium text-[#A6564D]">
+        <div className="mt-auto border-t border-[#E8DED5] pt-5">
+          <p className="text-[14px] font-semibold text-[#2C2725]">
             Rosana G.
           </p>
 
@@ -514,15 +708,20 @@ object-cover"
       </article>
 
       {/* CARD 5 */}
-      <article className="rounded-[32px] border border-[#E8DDD5] bg-[#FAF8F5] p-10">
-        <span className="text-5xl text-[#D6B7A6] leading-none">"</span>
+      <article className="
+relative flex h-full min-h-[340px] flex-col overflow-hidden rounded-[16px] border border-[#E8DED5] bg-[#FFFEFC] p-8 lg:p-9 shadow-[0_10px_30px_rgba(82,62,48,0.06)]
+">
+        
 
-        <p className="mt-6 text-[#7A6B60] leading-relaxed">
-          Ana es absolutamente increíble. Siempre consigue que me sienta completamente cómoda durante los tratamientos y los resultados desde que la visito son espectaculares.
+        <p
+  className="mb-8 flex-1 text-[17px] text-[#5F5852] leading-[1.8]"
+  style={{ fontFamily: "Thasadith", fontWeight: 400 }}
+>
+          Ana es increíble. Siempre consigue que me sienta super cómoda durante los tratamientos y los resultados desde que la visito son espectaculares.
         </p>
 
-        <div className="mt-17 pt-6 border-t border-[#EEE5DE]">
-          <p className="font-medium text-[#A6564D]">
+        <div className="mt-auto border-t border-[#E8DED5] pt-5">
+          <p className="text-[14px] font-semibold text-[#2C2725]">
             Sofia O.
           </p>
 
@@ -531,15 +730,20 @@ object-cover"
       </article>
 
       {/* CARD 6 */}
-      <article className="rounded-[32px] border border-[#E8DDD5] bg-[#FAF8F5] p-10">
-        <span className="text-5xl text-[#D6B7A6] leading-none">"</span>
+      <article className="
+relative flex h-full min-h-[340px] flex-col overflow-hidden rounded-[16px] border border-[#E8DED5] bg-[#FFFEFC] p-8 lg:p-9 shadow-[0_10px_30px_rgba(82,62,48,0.06)]
+">
+        
 
-        <p className="mt-6 text-[#7A6B60] leading-relaxed">
-          Pasé de tener una piel muy propensa al acné a una piel increíblemente suave gracias a los protocolos con Ana. Ha estado ahí en cada paso de mi proceso y estoy muy feliz con los resultados.
+       <p
+  className="mb-8 flex-1 text-[17px] text-[#5F5852] leading-[1.8]"
+  style={{ fontFamily: "Thasadith", fontWeight: 400 }}
+>
+          Pasé de tener una piel muy propensa al acné a una piel sin marcas gracias a estos protocolos. Ha estado ahí en cada paso de mi proceso y estoy muy feliz con los resultados.
         </p>
 
-        <div className="mt-17 pt-6 border-t border-[#EEE5DE]">
-          <p className="font-medium text-[#A6564D]">
+        <div className="mt-auto border-t border-[#E8DED5] pt-5">
+          <p className="text-[14px] font-semibold text-[#2C2725]">
             Ambar C.
           </p>
 
@@ -553,781 +757,205 @@ object-cover"
 </section>
 
       {/* FAQ */}
-      <section className="px-6 md:px-19 py-0 mb-18 mt-12 bg-white">
-        <div className="bg-[#F5F2EE] rounded-[6px] p-10 md:p-16 max-w-[2000px] mx-auto">
+<section className="mx-4 my-4 rounded-[16px] bg-transparent sm:mx-6 sm:my-6 lg:mx-16 lg:my-8">
+  <div className="w-full rounded-[16px] bg-[#E9DCCF] p-6 sm:p-8 md:p-10 xl:p-16">
 
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-16 items-start">
+    <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-20 items-start">
 
-          
+      {/* IZQUIERDA */}
+      <div>
 
-          <div className=" border-black/10 mt-8">
-<div className="mb-8 max-w-3xl">
-
-            <p className="text-[11px] uppercase tracking-[0.24em] text-[#B98B72] mb-6">
-              FAQ
-            </p>
-
-            <h2 className="text-[12px] text-[48px] sm:text-[74px] md:text-[60px] text-[#B98B72] leading-[0.96] tracking-[-0.05em] font-bold max-w-3xl">
-              todo lo que
-              <br />
-              necesitas saber
-            </h2>
-
-          </div>
-            {[
-               {
-                question: '¿Que es un centro de recuperación cutánea?',
-                answer:
-                  'Es un espacio especializado en restaurar el equilibrio natural de la piel. En lugar de centrarnos únicamente en tratamientos o productos, trabajamos para que la piel vuelva a funcionar de forma saludable y autónoma.'
-              },
-              {
-                question: '¿Es normal que mi piel empeore aunque esté usando buenos productos?',
-                answer:
-                  'Sí. Un buen producto no garantiza buenos resultados si no responde a las necesidades reales de tu piel. En muchos casos, el problema no está en la calidad de los productos, sino en la combinación, la frecuencia de uso o la incapacidad de la piel para tolerarlos en ese momento.'
-              },
-              {
-                question: '¿Por qué mi piel se irrita con casi todo?',
-                answer:
-                  'Porque una piel sensibilizada pierde parte de su capacidad para tolerar estímulos cotidianos. Cuando la barrera cutánea está alterada, ingredientes que antes eran bien tolerados pueden provocar molestias, rojeces o inflamación.'
-              },
-              {
-                question: '¿Cuánto tiempo tarda realmente una piel en recuperarse?',
-                answer:
-                  'Depende del problema, del tiempo que lleve presente y del estado general de la piel. La recuperación real rara vez ocurre en días o semanas aunque se notan mejoras inmediatamente tras recibir dirección y protocolo.'
-              },
-               {
-                question: '¿Necesito una rutina con muchos productos para mejorar?',
-                answer:
-                  'No. Una piel sana no debería depender de una rutina interminable. Nuestro objetivo es identificar lo que realmente aporta valor y eliminar todo aquello que añade complejidad sin aportar beneficios reales.'
-              },
-              {
-                question: '¿Por qué mi acné vuelve una y otra vez?',
-                answer:
-                  'Porque muchas estrategias consiguen reducir temporalmente los brotes sin abordar los factores que los mantienen activos. Mientras esos factores sigan presentes, la piel tenderá a repetir los mismos patrones.'
-              },
-                {
-                question: '¿La rosácea puede mejorar de forma estable?',
-                answer:
-                  'Aunque la rosácea no tiene una cura definitiva, muchas personas consiguen reducir significativamente la frecuencia e intensidad de los brotes cuando aprenden a comprender los desencadenantes de su piel y a respetar sus límites biológicos.'
-              },
-                {
-                question: '¿Por qué mi piel depende de los tratamientos para verse bien?',
-                answer:
-                  'Cuando una piel necesita intervenciones constantes para mantenerse estable, suele indicar que todavía no ha recuperado completamente su equilibrio. Nuestro objetivo es reducir esa dependencia progresivamente.'
-              },
-              {
-                question: '¿Es posible tener una piel sana con una rutina mínima?',
-                answer:
-                  'Sí. De hecho, una de nuestras metas es ayudarte a construir una rutina sencilla, sostenible y eficaz. Una piel equilibrada debería requerir menos esfuerzo, no más.'
-              },
-              {
-                question: '¿Por qué mi piel nunca mejora del todo?',
-                answer:
-                  'Muchas veces el problema no es únicamente superficial. La piel puede reflejar inflamación interna, hábitos o desequilibrios que necesitan abordarse de forma global.'
-              },
-              {
-                question: '¿La nutrición afecta a la piel?',
-                answer:
-                  'Sí. La piel refleja muchos procesos internos relacionados con alimentación, hidratación, inflamación, descanso y estilo de vida.'
-              }
-            ].map((faq, index) => (
-
-              <div
-                key={index}
-                className="border-b border-black/5 py-2 md:py-8"
-              >
-
-                <button
-                  onClick={() =>
-                    setFaqOpen(faqOpen === index ? null : index)
-                  }
-                  className="w-full flex items-center justify-between gap-6 text-left"
-                >
-
-                  <span className="text-[16px] md:text-[18px] tracking-[-0.03em] font-black text-[#5E534A]">
-                    {faq.question}
-                  </span>
-
-                  <span className="text-[22px] text-[#888] font-normal">
-                    {faqOpen === index ? '−' : '+'}
-                  </span>
-
-                </button>
-
-                {faqOpen === index && (
-                  <p className="max-w-2xl text-[14px] md:text-[15px] leading-relaxed text-[#666] font-normal mt-6">
-                    {faq.answer}
-                  </p>
-                )}
-
-              </div>
-
-            ))}
-
-          </div>
-
-        </div>
-</div>
-      </section>
-
-      {/* PLANES DE RECUPERACION */}
-      {open && (
-
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm overflow-y-auto">
-
-          <div className="min-h-screen flex items-start md:items-center justify-center px-4 py-8 md:py-10">
-
-            <div
-  className="relative w-full max-w-6xl overflow-hidden rounded-[12px] border border-white/10 p-6 md:p-12"
-  style={{
-  background:
-    "radial-gradient(circle at 50% 15%, #A36B42 0%, #4B2B1B 25%, #1A120F 55%, #050505 100%)",
-}}
+        <div className="mb-8 max-w-3xl">
+          <h2
+  className="text-[54px] md:text-[54px] text-[#2C2725] leading-[0.96] tracking-[-0.05em]"
+  style={{ fontFamily: "satoshi", fontWeight: 700 }}
 >
-  <div className="absolute inset-0 pointer-events-none">
-
-    {/* Luz superior */}
-    <div
-      className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-[180px]"
-      style={{
-        background: "rgba(242,237,228,0.12",
-      }}
-    />
-
-    {/* Luz lateral derecha */}
-    <div
-      className="absolute top-10 right-[-150px] w-[500px] h-[500px] rounded-full blur-[140px]"
-      style={{
-        background: "rgba(179,169,157,0.10)",
-      }}
-    />
-
-    {/* Luz inferior izquierda */}
-    <div
-      className="absolute bottom-[-100px] left-[-100px] w-[550px] h-[550px] rounded-full blur-[150px]"
-      style={{
-        background: "rgba(93,83,74,0.10)",
-      }}
-    />
-
-    {/* Oscurecer bordes */}
-    <div
-      className="absolute inset-0"
-      style={{
-        background:
-          "radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.35) 100%)",
-      }}
-    />
-
-  </div>
-
-<div className="absolute inset-0 bg-black/20 rounded-[6px] pointer-events-none" />
-
-<div className="relative z-10 mb-12 max-w-3xl pt-10 md:pt-2">
-
-               <h2
-  className="mb-2 text-[40px] text-[#B88A72] md:text-[48px] leading-[0.98] tracking-[-0.02em] font-bold"
-  style={{
-    fontFamily: 'satoshi',
-    fontWeight: 700
-  }}
->
-
-  elige cómo empezar
-
+  F∆Q
 </h2>
+        </div>
 
-<p className="text-[14px] md:text-[15px] leading-relaxed text-[#ffffff] font-medium max-w-2xl">
-  Tres niveles de acompañamiento para empezar tu recuperación
-</p> 
-
-                
-
-              </div>
-              <button
-                onClick={() => setOpen(false)}
-                className="absolute top-6 right-6 text-[#999] text-2xl"
-              >
-                ×
-              </button>
-
-              
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-14 items-stretch">
-                
-
-  {/* PLAN LIBRE */}
-
-  <div className="mt-[4px] rounded-[40px] relative
-overflow-visible border border-[#F3EFEA] bg-[#F3EFEA] bg-transparent backdrop-blur-xl p-10 min-h-[620px] flex flex-col shadow-[0_10px_40px_rgba(0,0,0,0.04)]">
-<div
-  onClick={() => setShowPrice1(!showPrice1)}
-  className="
-  absolute
-  top-25
-  -right-4
-  h-14
-  bg-[#ffffff]
-  rounded-tr-xl
-  rounded-br-xl
-  cursor-pointer
-  flex
-  items-center
-  justify-center
-  transition-all
-  duration-300
-  overflow-hidden
-  "
-  style={{
-    width: showPrice1 ? "65px" : "24px"
-  }}
->
-  {showPrice1 && (
-    <span className="flex flex-col items-center text-white text-[12px] font-medium leading-none">
-      <span>precio</span>
-    <span>único</span>
-    </span>
-  )}
-</div>
-
-    <div>
-
-      <span className="text-[11px] tracking-[0.18em] text-[#ffffff]">
-        autonomía total
-      </span>
-
-      <h3
-  className="mt-10 text-[28px] text-[#D6C1B0] md:text-[32px] leading-[0.95] tracking-[-0.03em] uppercase"
-  style={{
-    fontFamily: 'satoshi',
-    fontWeight: 500
-  }}
->
-        PLAN LIBRE
-      </h3>
-
-      <p className="mt-8 text-[15px] leading-relaxed text-[#D6C1B0] italic max-w-[280px]">
-        Para quienes ya conocen su piel y saben exactamente qué quieren.
-      </p>
-
-    </div>
-
-    <div className="space-y-4 pt-14">
-
-  <div className="flex items-start gap-3 text-[15px] text-[#ffffff]">
-    <span>✓</span>
-    <span>Acceso a protocolos</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#ffffff]">
-    <span>✓</span>
-    <span>Reserva directa</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#999] opacity-50">
-    <span>×</span>
-    <span>Análisis corneométrico y diagnóstico</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#999] opacity-50">
-    <span>×</span>
-    <span>Seguimiento continuo</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#999] opacity-50">
-    <span>×</span>
-    <span>Prescripción dermocosmética</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#999] opacity-50">
-    <span>×</span>
-    <span>Soporte wellness (suplementos, nutrición, fitness)</span>
-  </div>
-
-</div>
-<div className="mt-8">
-  <button
-  id="plan-libre-slider"
-
-onMouseMove={handleMove}
-onMouseUp={handleEnd}
-onMouseLeave={handleEnd}
-onTouchMove={handleMove}
-onTouchEnd={handleEnd}
-  className="
-    relative
-    w-full
-    h-12
-    rounded-full
-    bg-[#B98B72]
-    text-white
-    overflow-hidden
-    mt-8
-  "
->
-  <span
-    className="
-      absolute
-      inset-0
-      flex
-      items-center
-      justify-center
-      text-[11px]
-      uppercase
-      tracking-[0.2em]
-      pointer-events-none
-    "
-  >
-    Consultar disponibilidad
-  </span>
-
-  <div
-    onMouseDown={handleStart}
-    onTouchStart={handleStart}
-    style={{
-      transform: `translateX(${position}px) translateY(-50%)`,
-    }}
-    className="
-      absolute
-      left-2
-      top-1/2
-      w-10
-      h-10
-      rounded-full
-       bg-white/40
-      cursor-grab
-      shadow-md
-    "
-  />
-</button>
-</div>
-  </div>
-
-  {/* PLAN GUIADO */}
-
-  <div
-  className="
-    mt-[4px]
-    rounded-[40px]
-    relative
-    overflow-visible
-    border
-    border-[#F3EFEA]
-    bg-[#F3EFEA]
-    bg-transparent
-    backdrop-blur-xl
-    p-10
-    min-h-[620px]
-    flex
-    flex-col
-    shadow-[0_10px_40px_rgba(0,0,0,0.04)]
-  "
->
-<div
-  onClick={() => setShowPrice2(!showPrice2)}
-  className="
-  absolute
-  top-25
-  -right-4
-  h-14
-  bg-[#ffffff]
-  rounded-tr-xl
-  rounded-br-xl
-  cursor-pointer
-  flex
-  items-center
-  justify-center
-  transition-all
-  duration-300
-  overflow-hidden
-  "
-  style={{
-    width: showPrice2 ? "65px" : "24px"
-  }}
->
-  {showPrice2 && (
-    <span className="text-white text-[12px] font-medium">
-      +20€
-    </span>
-  )}
-</div>
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#B98B72]/70 text-[#FFFFFF] text-[11px] uppercase tracking-[0.18em] px-4 py-2 rounded-full">
-      Más elegido
-    </div>
-
-    <div>
-
-      <span className="text-[11px] lowercase tracking-[0.18em] text-[#ffffff]">
-        orientación inicial
-      </span>
-
-      <h3
-  className="mt-10 text-[28px] text-[#D6C1B0] md:text-[32px] leading-[0.95] tracking-[-0.03em] uppercase"
-  style={{
-    fontFamily: 'satoshi',
-    fontWeight: 500
-  }}
->
-        PLAN GUIADO
-      </h3>
-
-      <p className="mt-8 text-[15px] leading-relaxed italic text-[#D6C1B0]">
-        Para quienes quieren confirmar que están en el camino correcto antes de empezar.
-      </p>
-
-    </div>
-
-    <div className="space-y-4 pt-8">
-
-  <div className="flex items-start gap-3 text-[15px] text-[#ffffff]">
-    <span>✓</span>
-    <span>Acceso a protocolos</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#ffffff]">
-    <span>✓</span>
-    <span>Reserva directa</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#ffffff]">
-    <span>✓</span>
-    <span>Análisis corneométrico y diagnóstico</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#999] opacity-50">
-    <span>×</span>
-    <span>Seguimiento continuo</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#999] opacity-50">
-    <span>×</span>
-    <span>Prescripción dermocosmética</span>
-  </div>
-
-  <div className="flex items-start gap-3 text-[15px] text-[#999] opacity-50">
-    <span>×</span>
-    <span>Soporte wellness (suplementos, nutrición, fitness)</span>
-  </div>
-
-
-</div>
-<div className="mt-8">
-  <button
-    id="plan-guiado-slider"
-    onMouseMove={handleMoveGuiado}
-    onMouseUp={handleEndGuiado}
-    onMouseLeave={handleEndGuiado}
-    onTouchMove={handleMoveGuiado}
-    onTouchEnd={handleEndGuiado}
-    className="
-      relative
-      w-full
-      h-12
-      rounded-full
-      bg-[#B98B72]
-      text-white
-      overflow-hidden
-      mt-8
-    "
-  >
-    <span
-      className="
-        absolute
-        inset-0
-        flex
-        items-center
-        justify-center
-        text-[11px]
-        uppercase
-        tracking-[0.2em]
-        pointer-events-none
-      "
-    >
-      Consultar disponibilidad
-    </span>
-
-    <div
-      onMouseDown={handleStartGuiado}
-      onTouchStart={handleStartGuiado}
-      style={{
-        transform: `translateX(${positionGuiado}px) translateY(-50%)`,
-      }}
-      className="
-        absolute
-        left-2
-        top-1/2
-        w-10
-        h-10
-        rounded-full
-        bg-white/40
-        cursor-grab
-        shadow-md
-      "
-    />
-  </button>
-</div>
-  </div>
-
-  {/* CLUB */}
-
-  <div
-  className="
-    mt-[4px]
-    rounded-[40px]
-    relative
-    overflow-visible
-    border
-    border-[#F3EFEA]
-    bg-[#F3EFEA]
-    bg-transparent
-    backdrop-blur-xl
-    p-10
-    min-h-[620px]
-    flex
-    flex-col
-    shadow-[0_10px_40px_rgba(0,0,0,0.04)]
-  "
->
-  <div
-  onClick={() => setShowPrice3(!showPrice3)}
-  className="
-  absolute
-  top-25
-  -right-4
-  h-14
-  bg-[#ffffff]
-  rounded-tr-xl
-  rounded-br-xl
-  cursor-pointer
-  flex
-  items-center
-  justify-center
-  transition-all
-  duration-300
-  overflow-hidden
-  "
-  style={{
-    width: showPrice3 ? "65px" : "24px"
-  }}
->
-  {showPrice3 && (
-    <span className="text-white text-[12px] font-medium">
-      50€/mes
-    </span>
-  )}
-</div>
-    <div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#B98B72]/70 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.22em] px-4 py-2 rounded-full border border-white/10">
-  Más completo
-</div>
-
-      <span className="text-[11px] tracking-[0.18em] text-[#ffffff]">
-        acompañamiento continuo
-      </span>
-
-      <h3
-  className="mt-10 text-[28px] md:text-[32px] text-[#D6C1B0] leading-[0.95] tracking-[-0.03em]"
-  style={{
-    fontFamily: 'satoshi',
-    fontWeight: 500
-  }}
->
-        the<strong>skin</strong>fix CLUB
-      </h3>
-
-      <p className="mt-8 text-[15px] text-[#D6C1B0] italic leading-relaxed max-w-[280px]">
-        Para aquellos que buscan resultados a largo plazo.
-      </p>
-
-</div>
-    <div className="space-y-4 pt-14">
-
-      <div className="flex items-start gap-3 text-[#ffffff] text-[15px] 999">
-        <span>✓</span>
-        <span>Acceso a protocolos</span>
-      </div>
-
-      <div className="flex items-start gap-3 text-[#ffffff] text-[15px]">
-        <span>✓</span>
-        <span>Reserva directa con prioridad</span>
-      </div>
-
-      <div className="flex items-start gap-3 text-[#ffffff] text-[15px]">
-        <span>✓</span>
-        <span>Análisis corneométrico y diagnóstico</span>
-      </div>
-
-      <div className="flex items-start gap-3 text-[#ffffff] text-[15px]">
-        <span>✓</span>
-        <span>Seguimiento continuo</span>
-      </div>
-
-<div className="flex items-start gap-3 text-[#ffffff] text-[15px]">
-        <span>✓</span>
-        <span>Prescripción dermocosmética</span>
-      </div>
-
-      <div className="flex items-start gap-3 text-[#ffffff] text-[15px]">
-        <span>✓</span>
-        <span>Soporte wellness (suplementos, nutrición, fitness)</span>
-      </div>
-
-<div className="mt-8">
-        <button
-          id="club-slider"
-          onMouseMove={handleMoveClub}
-          onMouseUp={handleEndClub}
-          onMouseLeave={handleEndClub}
-          onTouchMove={handleMoveClub}
-          onTouchEnd={handleEndClub}
-          className="
-            relative
-            w-full
-            h-12
-            rounded-full
-            bg-[#B98B72]
-            text-white
-            overflow-hidden
-            mt-8
-          "
-        >
-          <span
-            className="
-              absolute
-              inset-0
-              flex
-              items-center
-              justify-center
-              text-[11px]
-              uppercase
-              tracking-[0.2em]
-              pointer-events-none
-            "
-          >
-            Consultar disponibilidad
-          </span>
+        {[
+          {
+    question: '¿Qué es un centro de recuperación cutánea?',
+    answer:
+      'Es un espacio dedicado al cuidado de la piel con protocolos adaptados a sus necesidades y a su estado.'
+  },
+  {
+    question: '¿Tengo que saber qué protocolo necesito?',
+    answer:
+      'No. Puedes contarnos qué te preocupa y te orientaremos sobre el punto de partida más adecuado para tu piel.'
+  },
+  {
+    question: '¿Qué incluye la valoración del PLAN GUIADO?',
+    answer:
+      'Incluye una valoración de la piel y una medición con corneometría para conocer mejor su estado.'
+  },
+  {
+    question: '¿Cuánto tarda la piel en recuperarse?',
+    answer:
+      'Cada piel tiene su ritmo. El tiempo depende de su estado y de sus necesidades; en tu caso te explicaremos qué puedes esperar y cómo avanzar.'
+  },
+  {
+    question: '¿Cómo reservo una cita?',
+    answer:
+      'Escríbenos por WhatsApp para consultar disponibilidad y contarnos qué plan te interesa.'
+  },
+  {
+    question: '¿Es normal que mi piel reaccione a algunos productos?',
+    answer:
+      'Puede ocurrir si un producto no encaja con las necesidades de tu piel o con el momento en que se encuentra. Si la irritación persiste, consulta con un profesional sanitario.'
+  },
+  {
+    question: '¿Y si tengo rosácea o la piel muy sensible?',
+    answer:
+      'Cada piel necesita un cuidado distinto. Si tienes rosácea o síntomas persistentes, sigue también las indicaciones de tu dermatólogo; el cuidado estético no sustituye la atención médica.'
+  }
+        ].map((faq, index) => (
 
           <div
-            onMouseDown={handleStartClub}
-            onTouchStart={handleStartClub}
-            style={{
-              transform: `translateX(${positionClub}px) translateY(-50%)`,
-            }}
-            className="
-              absolute
-              left-2
-              top-1/2
-              w-10
-              h-10
-              rounded-full
-              bg-white/40
-              cursor-grab
-              shadow-md
-            "
-          />
-        </button>
-      </div>
+            key={index}
+            className="border-b border-black/5 py-2 md:py-8"
+          >
 
-    </div>
+            <button
+              onClick={() => setFaqOpen(faqOpen === index ? null : index)}
+              className="w-full flex items-center justify-between gap-6 text-left"
+            >
 
-  </div>
+              <span className="text-[17px] md:text-[17px] tracking-[-0.03em] font-black text-[#2C2725]">
+                {faq.question}
+              </span>
 
-</div>
-<button
-  onClick={() => setShowTerms(true)}
-  className="
-    w-7
-    h-7
-    mt-5
-    rounded-full
-    border
-    border-[#B98B72]/100
-    text-[#B98B72]
-    flex
-    items-center
-    justify-center
-    text-[12px]
-    opacity-90
-    hover:opacity-100
-    transition-all
-  "
+              <span className="text-[22px] text-[#A86F56]">
+                {faqOpen === index ? "−" : "+"}
+              </span>
+
+            </button>
+
+            {faqOpen === index && (
+              <p
+  className="max-w-2xl text-[15px] md:text-[15px] leading-relaxed text-[#5F5852] mt-6"
+  style={{ fontFamily: "thasadith" }}
 >
-  i
-</button>
-{showTerms && (
-  <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm">
-    <div className="max-w-md rounded-[28px] bg-[#F7F3EF] p-8 shadow-xl">
-      
-      <button
-        onClick={() => setShowTerms(false)}
-        className="float-right text-[#8B8072]"
-      >
-        ×
-      </button>
-
-      <h3 className="mb-4 text-[#B98B72] text-[26px]">
-        información adicional
-      </h3>
-
-      <div className="space-y-3 text-sm text-[#5E534A] leading-relaxed">
-<p>
-          • Los <em>planes de recuperación</em> pueden modificarse en cualquier momento, siempre que se solicite con la antelación suficiente para su gestión y esta quede confirmada.
-        </p>
-        <p>
-          • Los <em>protocolos</em> se presupuestan de forma independiente a los planes de recuperación.
-        </p>
-        <p>
-          • El PLAN LIBRE incluye exclusivamente el protocolo seleccionado, es decir, el protocolo BASE.
-        </p>
-
-        <p>
-          • El PLAN GUIADO añade un coste inicial por asesoría, independiente al coste del protocolo.
-        </p>
-
-        <p>
-          
-        </p>• the<strong>skin</strong>fix CLUB es un sistema de membresía mensual en la que el profesional realizará los ajustes necesarios para acompañar la evolución de cada caso.
-         <p></p>
-        <p>
-          • La <em>prescripción dermocosmética</em> está incluida en the<strong>skin</strong>fix CLUB. Los productos recomendados no están incluidos y deberán ser adquiridos independientemente por el cliente.
-        </p>
-<div className="mt-6 pt-4 border-t border-[#B89B72]/20 text-center">
-  <a
-    href="https://wa.me/34618820842"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-[14px] text-[#8A7B70] hover:text-[#A6564D] transition-colors"
-  >
-    ¿Alguna duda? Contáctenos.
-  </a>
-</div>
-      </div>
-    </div>
-  </div>
-)}
-            </div>
+  {faq.answer}
+</p>
+            )}
 
           </div>
 
-        </div>
+        ))}
 
-      )}
+      </div>
+
+      {/* DERECHA */}
+      <div className="hidden lg:block sticky top-28 mt-6">
+
+        <img
+          src="/diagnostico/conversacion.png"
+          alt="Profesional conversa con una clienta durante una consulta de piel"
+          className="w-full rounded-[16px] object-cover"
+        />
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{open && (
+
+<PlanesModal
+  open={open}
+  setOpen={setOpen}
+  showTerms={showTerms}
+  setShowTerms={setShowTerms}
+  showPrice1={showPrice1}
+  setShowPrice1={setShowPrice1}
+  showPrice2={showPrice2}
+  setShowPrice2={setShowPrice2}
+  showPrice3={showPrice3}
+  setShowPrice3={setShowPrice3}
+  position={position}
+  positionGuiado={positionGuiado}
+  positionClub={positionClub}
+  handleMove={handleMove}
+  handleEnd={handleEnd}
+  handleStart={handleStart}
+  handleMoveGuiado={handleMoveGuiado}
+  handleEndGuiado={handleEndGuiado}
+  handleStartGuiado={handleStartGuiado}
+  handleMoveClub={handleMoveClub}
+  handleEndClub={handleEndClub}
+  handleStartClub={handleStartClub}
+  triggerPlanLibre={triggerPlanLibre}
+  triggerPlanGuiado={triggerPlanGuiado}
+  triggerPlanClub={triggerPlanClub}
+/>
+)}
       
-<footer className="relative rounded-[6px] mx-6 mb-17 md:mx-19 mt-1 h-[300px] overflow-hidden">
-  <img
-    src="/footer-texture.webp"
-    alt="Footer texture"
-    className="absolute inset-0 w-full h-full object-cover opacity-60 brightness-[1.02] contrast-[1.05]"
-  />
-
-  <div className="relative z-10 flex h-full items-end justify-between px-8 pb-8 text-[#5E534A]">
-    <div>
-  <span className="font-satoshi text-[#B98B72] text-[28px] leading-none">
-    the<strong>skin</strong>fix™
+      <section className="relative isolate mx-4 my-4 overflow-hidden rounded-[16px] bg-[#FAF8F5] px-6 py-20 md:py-24 sm:mx-6 sm:my-6 lg:mx-16 lg:my-8">
+  <span
+    aria-hidden="true"
+    className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[72px] font-black tracking-[-0.04em] text-[#B79C88]/65 sm:text-[112px] lg:text-[160px]"
+    style={{ fontFamily: "satoshi" }}
+  >
+    HORARIO
   </span>
 
-  <p className="text-sm text-[#B98B72] tracking-[0.13em] text-[11px] mt-0">
-    CENTRO DE RECUPERACIÓN CUTÁNEA
+  <div className="relative z-10 mx-auto max-w-5xl text-center">
+    <div className="mx-auto grid max-w-4xl gap-y-6 sm:grid-cols-2 sm:gap-x-20">
+      <div className="flex min-h-[138px] flex-col items-center justify-center rounded-[16px] bg-[#FFFEFC]/80 px-6 py-7">
+        <p
+          className="text-[12px] font-semibold tracking-[0.14em] text-[#5F5852]"
+          style={{ fontFamily: "satoshi" }}
+        >
+          LUNES A VIERNES
+        </p>
+        <p
+          className="mt-3 text-[24px] tracking-[-0.03em] text-[#2C2725] md:text-[26px]"
+          style={{ fontFamily: "satoshi", fontWeight: 600 }}
+        >
+          10:00 – 20:00
+        </p>
+      </div>
+
+      <div className="flex min-h-[138px] flex-col items-center justify-center rounded-[16px] bg-[#FFFEFC]/80 px-6 py-7">
+        <p
+          className="text-[12px] font-semibold tracking-[0.14em] text-[#5F5852]"
+          style={{ fontFamily: "satoshi" }}
+        >
+          SÁBADOS
+        </p>
+        <p
+          className="mt-3 text-[24px] tracking-[-0.03em] text-[#2C2725] md:text-[26px]"
+          style={{ fontFamily: "satoshi", fontWeight: 600 }}
+        >
+          CON CITA PREVIA
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer className="relative mx-4 my-4 h-[300px] overflow-hidden rounded-[16px] sm:mx-6 sm:my-6 lg:mx-16 lg:my-8">
+  <img
+  src="/TSFtapiz1.png"
+  alt="TSF Tapiz"
+  className="absolute inset-0 w-full h-full object-cover opacity-10 brightness-[1.02] contrast-[1.05]"
+/>
+
+  <div className="relative z-10 flex h-full items-end justify-between px-8 pb-8 text-[#2C2725]">
+    <div>
+  <Image
+  src="/tsf-logo.png"
+  alt="The Skin Fix"
+  width={150}
+  height={52}
+  className="h-[40px] w-auto"
+/>
+
+  <p className="text-sm text-[#000000] tracking-[0.13em] text-[8px] mt-2">
+    RECUPERACIÓN CUTÁNEA
   </p>
 </div>
 
@@ -1335,81 +963,131 @@ onTouchEnd={handleEnd}
 
     
 
-<div className="flex gap-6 text-sm text-[#847E78]">
-  <a href="/terminos">Términos</a>
-  <a href="/privacidad">Privacidad</a>
-  <a href="/cookies">Cookies</a>
+<div className="flex gap-6 text-sm text-[#2C2725]">
+  <a href="/terminos">TÉRMINOS</a>
+  <a href="/privacidad">PRIVACIDAD</a>
+  <a href="/cookies">COOKIES</a>
 
-  <p className="text-sm text-[#B98B72]">
-  Tenerife · España
-</p>
+  
 </div>
   </div>
+  
 </footer>
-<a
-  href="https://wa.me/34618820842?text=Hola%20Ana,%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20The%20Skin%20Fix."
-  target="_blank"
-  rel="noopener noreferrer"
-  className="
-    fixed
-    bottom-6
-    right-6
-    z-50
-    w-[320px]
-    rounded-[24px]
-    border
-    border-[#E5DED5]
-    bg-[#F9F8F6]
-    p-5
-    shadow-[0_20px_40px_rgba(0,0,0,0.12)]
-    hover:translate-y-[-2px]
-    transition-all
-  "
+<form
+name="consulta"
+  method="POST"
+  data-netlify="true"
+  className={`fixed bottom-6 right-6 z-50 overflow-hidden transition-all duration-300
+${isMinimized
+  ? "h-[54px] w-[54px] rounded-full bg-[#25D366] p-0 shadow-[0_8px_22px_rgba(37,211,102,0.35)] hover:-translate-y-1"
+  : "h-auto w-[320px] rounded-[18px] border border-white/25 bg-[#2C2725]/90 p-6 text-[#FFF8F0] backdrop-blur-xl shadow-[0_18px_45px_rgba(0,0,0,0.12),inset_0_1px_1px_rgba(255,255,255,0.65)] hover:-translate-y-[2px]"
+}`}
 >
-  <div className="flex items-center gap-3 mb-3">
-    <div className="w-3 h-3 rounded-full bg-[#7A9275]" />
-    <div>
-      <p className="text-[14px] font-medium text-[#5D534A]">
-        Ana · The Skin Fix
-      </p>
+  <div className={`flex items-center justify-between ${isMinimized ? "mb-0" : "mb-5"}`}>
 
-      <p className="text-[12px] text-[#8B8177]">
-        Online
-      </p>
-    </div>
-  </div>
-
-  <p className="text-[15px] text-[#5D534A] leading-relaxed">
-    Hola 👋
-  </p>
-
-  <p className="text-[15px] text-[#5D534A] leading-relaxed mt-1">
-    ¿Necesitas ayuda?
-  </p>
-
-  <p className="text-[13px] text-[#8B8177] mt-3">
-    Resolvemos tus dudas antes de empezar.
-  </p>
-
-  <div
-    className="
-      mt-4
-      inline-flex
-      items-center
-      justify-center
-      rounded-full
-      bg-[#B98B72]
-      px-5
-      py-3
-      text-white
-      text-[11px]
-      uppercase
-      tracking-[0.2em]
-    "
+  {isMinimized ? (
+  <button
+    type="button"
+    onClick={() => setIsMinimized(false)}
+    aria-label="Abrir chat de WhatsApp"
+    className="flex h-[54px] w-[54px] items-center justify-center rounded-full text-white transition-transform duration-200 hover:scale-105"
   >
-    Hablar por WhatsApp
-  </div>
-</a>
+    <svg viewBox="0 0 32 32" className="h-7 w-7" fill="none" aria-hidden="true">
+      <path d="M16 4.2c-6.5 0-11.8 5-11.8 11.2 0 2.2.7 4.3 1.9 6L4.8 27.2l6.1-1.6c1.6.7 3.3 1.1 5.1 1.1 6.5 0 11.8-5 11.8-11.2S22.5 4.2 16 4.2Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M12.3 10.8c-.3-.5-.5-.5-.8-.5h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.3 3.6 5.6 4.8 2.8 1.1 3.4.9 4 .8.6-.1 1.8-.8 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.2-.3-.3-.7-.5l-2.1-1c-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.2-.2.4-.4.5-.6.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.2Z" fill="currentColor" />
+    </svg>
+  </button>
+
+  ) : (
+    <div className="flex items-center gap-3 -mt-[3px]">
+      <div className="w-2.5 h-2.5 rounded-full bg-[#6DDC5A] shadow-[0_0_12px_rgba(109,220,90,.8)] translate-y-[-3px]" />
+
+      <div className="-translate-y-1">
+        <p className="text-[16px] font-bold text-[#ffffff]">
+          Ana
+        </p>
+      </div>
+    </div>
+  )}
+
+  {!isMinimized && <button
+    type="button"
+    onClick={() => setIsMinimized(true)}
+    className="absolute right-6 top-2.5 text-xl text-[#FFF8F0]"
+  >
+    −
+  </button>}
+
+</div>
+
+<p className="text-[15px] text-[#ffffff] leading-relaxed">
+  Hola! Antes de empezar, me gustaría entender mejor tu caso, indícame:
+</p>
+
+<ul className="mt-6 space-y-2 text-[13px] text-[#ffffff]">
+  <li><em>Qué te preocupa de tu piel</em></li>
+  <li><em>Desde cuándo ocurre</em></li>
+  <li><em>Qué has probado hasta ahora</em></li>
+</ul>
+
+<div className="h-6"></div>
+
+<textarea
+  value={mensaje}
+  onChange={(e) => setMensaje(e.target.value)}
+  placeholder=""
+  className="
+    w-full
+    h-[95px]
+    rounded-2xl
+    bg-white/35
+    backdrop-blur-md
+    border
+    border-white/40
+    p-4
+    text-[15px]
+    text-[#2C2725]
+    placeholder:text-[#5F5852]
+    outline-none
+    resize-none
+    shadow-[inset_0_1px_2px_rgba(255,255,255,0.7)]
+  "
+/>
+
+<button
+  type="button"
+  onClick={() => {
+    window.open(
+      `https://wa.me/34618820842?text=${encodeURIComponent(mensaje)}`,
+      "_blank"
+    );
+  }}
+  className="
+  mt-4
+  w-full
+  rounded-[16px]
+  bg-[#2C2725]/85
+  py-3
+  text-white
+  text-[11px]
+  font-semibold
+  uppercase
+  tracking-[0.24em]
+  border
+  border-white/35
+  shadow-[0_10px_24px_rgba(201,168,143,0.28),inset_0_1px_1px_rgba(255,255,255,0.35)]
+  transition-all
+  duration-300
+  hover:bg-[#D3B39C]
+  hover:-translate-y-[2px]
+  hover:shadow-[0_16px_34px_rgba(201,168,143,0.42),inset_0_1px_1px_rgba(255,255,255,0.45)]
+  active:translate-y-0
+  active:shadow-[0_6px_16px_rgba(201,168,143,0.25),inset_0_2px_4px_rgba(0,0,0,0.08)]
+"
+>
+  ENVIAR
+</button>
+</form>
 </div>
 
 </>
